@@ -1,8 +1,8 @@
 # Nutrition
 
-Written to be updated once Section D of the [survey](../intake/INTAKE-SURVEY.md) comes
-back — feeding method changes everything below. Until then, this is the version that's
-safe regardless.
+**You're breastfeeding and pumping — all breastmilk.** That sets everything below.
+When you wean in December, most of these numbers change; that transition has its own
+file: [`WEANING-AND-RETURN-TO-WORK.md`](WEANING-AND-RETURN-TO-WORK.md).
 
 ## The single most important rule right now
 
@@ -29,19 +29,23 @@ goal is one word: **enough.**
 
 ## Calories
 
-*Fill in once weight is known.*
+Estimated maintenance ≈ **bodyweight (lb) × 14-15** at your current activity, then
+**+450-500 kcal/day** for full milk production.
 
-Rough frame: estimated maintenance ≈ **bodyweight (lb) × 14-15** for your current
-activity, then:
+**Your floor is about 2,000 kcal/day, and it is a floor, not a target.** Going under it
+while producing a full supply hits milk first, then muscle, then mood — in that order.
 
-| Feeding | Add | Floor — do not go below |
-|---|---|---|
-| Exclusively breastfeeding | **+450-500 kcal/day** | ~2,000 kcal |
-| Combo feeding | +250-350 kcal/day | ~1,900 kcal |
-| Not breastfeeding | +0 | ~1,700 kcal |
+Cap any weight change at **~1 lb/week** while lactating. Faster than that is the single
+most common cause of a supply drop, and it isn't fat coming off any faster anyway.
 
-If breastfeeding, cap any weight change at **~1 lb/week**. Faster than that is the
-most common cause of supply drops, and it isn't fat coming off any faster.
+*(Fill in your weight in the survey and this becomes a real number rather than a
+formula. If you'd rather skip numbers entirely, say so in Section D and this whole
+section gets rewritten around the plate template and protein anchors — it works about
+as well and costs far less mental energy.)*
+
+**In December this changes.** As sessions drop, the +450-500 goes away with them. See
+[`WEANING-AND-RETURN-TO-WORK.md`](WEANING-AND-RETURN-TO-WORK.md) — the calorie handoff
+is the part people miss, and it's why weight gain after weaning is so common.
 
 If you'd rather not deal with numbers at all (say so in survey Q D14 and this section
 gets rewritten): use the plate template below and the protein anchors, and skip
@@ -76,9 +80,10 @@ skip anything with herbal "blends."
 
 ## Fluid
 
-- Baseline: ~2.5-3 L/day
-- **Breastfeeding: add ~1 L** → **3.5-4 L/day**
+- **Your target now: 3.5-4 L/day** (baseline ~2.5-3 L, plus about a litre for milk)
 - Add 500-750 ml around any training session
+- Add more around pumping sessions specifically — that's when you'll notice it
+- Back to ~2.5-3 L once you've weaned
 
 Practical: a 32 oz bottle at every feeding station. Drink one **during** every feed —
 thirst hits hard mid-letdown and that's the easiest habit to attach it to. Dark urine
@@ -111,11 +116,14 @@ Every meal, in this order:
 
 - **Don't train fasted.** Even 20 g of protein and a banana beforehand.
 - **Eat within an hour after.** Protein + carbs.
-- If breastfeeding, **feed or pump before training** — comfort, and it protects supply.
+- **Feed or pump before training** — comfort, and it protects supply.
+- Training in a deficit while lactating hits supply first. If your supply dips in a
+  week you trained hard, look at food before you look at the training.
 
 ## Caffeine & alcohol
 
 - **Caffeine:** ≤300 mg/day (about 2-3 cups) is considered fine while breastfeeding.
+  Watch it especially once you're back at work — that's when it quietly doubles.
   Cut it off ~8 hours before you intend to sleep — with sleep this fragmented,
   protecting the quality of what you *do* get matters more than usual.
 - **Alcohol:** if breastfeeding, roughly 2 hours per standard drink before feeding.
@@ -126,9 +134,10 @@ Every meal, in this order:
 **Worth it:** prenatal (continue), vitamin D, omega-3, magnesium glycinate at night
 (sleep + cramps), protein powder as a convenience.
 
-**Wait:** creatine — genuinely good for you and well-supported for women, especially
-around 40, but data during lactation is thin. Revisit when you wean, or ask your
-provider.
+**Wait, then revisit:** creatine — genuinely good for you and well-supported for women,
+but the lactation data is thin. **Put it on the January list**: once you've weaned,
+3-5 g/day is one of the better-evidenced things you can add, and it lines up exactly
+with your real build month.
 
 **Skip:** anything marketed as "postpartum weight loss," detox teas, appetite
 suppressants, fat burners. All of it is contraindicated while breastfeeding and most
@@ -143,7 +152,8 @@ edible, one-handed, at 2pm, when you haven't sat down.
   make a pot of rice or potatoes. That's 4-5 assembled meals.
 - **Accept every meal train offer.** Ask for protein specifically.
 - **Grocery delivery**, standing weekly order.
-- **A "snack station" wherever you feed the baby** — shelf-stable protein, a water
-  bottle, restocked nightly.
+- **A "snack station" wherever you feed and pump** — shelf-stable protein, a water
+  bottle, restocked nightly. Drink the bottle during the session; thirst hits hardest
+  mid-letdown, which makes it the easiest habit to attach to.
 - Frozen vegetables, pre-cooked rice, canned fish, rotisserie chicken. None of this is
   cheating. Cooking from scratch is not a nutritional requirement.

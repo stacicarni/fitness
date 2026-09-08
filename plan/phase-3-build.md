@@ -1,9 +1,14 @@
 # Phase 3 — Build
-### PP weeks 15-18 · Mon Nov 23 → Sun Dec 20, 2026
+### PP weeks 15-16 · Mon Nov 23 → Sun Dec 6, 2026
 
-**Goal:** this is the first phase that looks like normal training. Strength gets
-genuinely heavy. If you passed the run-readiness test, running comes back — slowly,
-on a walk/run structure, and it does not get to eat the strength work.
+**Two weeks, and they matter more than their length suggests.** This is the last block
+before work, weaning, and the holidays all land at once. Everything after Dec 6 is
+about *holding* what you have. So this is the window where you deliberately push.
+
+**It is also where the milk taper starts.** Drop your first pump or feed in week 15 —
+see [`../nutrition/WEANING-AND-RETURN-TO-WORK.md`](../nutrition/WEANING-AND-RETURN-TO-WORK.md).
+Not because training needs it, but because a 3-4 week gradual taper started now lands
+you weaned right as you go back, instead of doing both in the same week.
 
 ## The weekly template
 
@@ -20,19 +25,21 @@ on a walk/run structure, and it does not get to eat the strength work.
 ## Strength
 
 Main lifts move to **4 × 5-6** at RPE 7-8. This is where the Bowflex range starts to
-matter — you should be past 30 lb on rows and RDLs by the end of this phase, and
-that's normal, not remarkable.
+matter — rows and RDLs should be past 30 lb by Dec 6, and that's normal, not remarkable.
 
 - Add a **third weekly main lift slot** on Day C: DB overhead press or weighted step-up
 - Accessories drop to 2 sets to protect total time
 - Add **loaded carries at 30+ lb** — the best pelvic-floor-under-load test you own
-- Core progresses to: side plank with top-leg lift, dead bug with band pull-over,
-  suitcase carry, Pallof press with band. Still no crunches. You won't miss them.
+- Core: side plank with top-leg lift, dead bug with band pull-over, suitcase carry,
+  Pallof press. Still no crunches.
+
+**Set a PR on each main lift before Dec 6.** Write the numbers in your log. They become
+the floor you protect through December and the launch point in January.
 
 ## Return to running — the walk/run ladder
 
-**Only if you passed the readiness test.** Two runs per week, never on consecutive
-days. All on the Ohlone Greenway or the treadmill (softer, and you can bail instantly).
+**Only if you passed the readiness test.** Two runs a week, never consecutive days.
+Ohlone Greenway or the treadmill.
 
 | Week | Dates | Session |
 |---|---|---|
@@ -40,27 +47,32 @@ days. All on the Ohlone Greenway or the treadmill (softer, and you can bail inst
 | 16 | Nov 30 - Dec 6 | 6 × (2 min jog / 2 min walk) = 24 min |
 | 17 | Dec 7-13 | 5 × (3 min jog / 2 min walk) = 25 min |
 | 18 | Dec 14-20 | 4 × (5 min jog / 2 min walk) = 28 min |
+| 19 | Dec 21-27 | 3 × (8 min jog / 2 min walk) = 30 min |
+| 20 | Dec 28 - Jan 3 | 20 min continuous, easy |
+
+The ladder runs *through* Phase 4 — running is the one thing that survives a schedule
+crunch, because it needs 25 minutes and a pair of shoes and nothing else.
 
 **Rules that are not optional:**
-- Easy pace only. If you can't talk in full sentences, walk.
+- Easy pace only. Full sentences or you walk.
 - **Post-run check:** leaking, heaviness, or a bleeding change in the 24 hours after
-  means the last progression was too much. Repeat the previous week instead of
-  advancing. Do this without negotiating with yourself.
-- Never advance two variables at once (duration *and* pace).
-- A sports bra that actually fits your current chest is equipment, not vanity — get
-  refitted, especially if you're breastfeeding. Run after a feed or pump, not before.
-- Wear shoes with under ~300 miles on them. Your 2013 marathon shoes are not shoes.
+  means the last progression was too much. Repeat the week; don't advance.
+- Never progress duration and pace in the same week.
+- **Run after a feed or pump**, while you're still lactating. Get a sports bra refitted
+  now, and again after you wean — your chest will change size twice in eight weeks.
+- Shoes with under ~300 miles on them. Your 2013 or 2017 marathon shoes are not shoes.
 
-**Not running yet?** Nothing is wrong. Keep Phase 2's impact ladder, retest in
-December, and use the two slots for elliptical or incline treadmill walking. Fitness
-built there transfers directly.
+**Not running yet?** Nothing is wrong. Keep the impact ladder, retest in December, and
+use the two slots for elliptical or incline treadmill walking.
 
-## Phase 3 exit checklist — before Dec 21
+## Phase 3 exit checklist — before Dec 7
 
-- [ ] Main lifts 4 × 5-6 at RPE 7-8, no symptoms
+- [ ] A recorded PR on squat, RDL, row, and press
 - [ ] Carries at 30 lb+ per hand
-- [ ] Either: continuous 20 min jog, symptom-free — or: readiness test retaken
+- [ ] Either: 24 min of walk/run, symptom-free — or: readiness test retaken
 - [ ] Zero leaking under load
-- [ ] A named 2027 goal written into `plan/PROGRESSION-RULES.md`
+- [ ] Milk taper underway, at least one session dropped
+- [ ] December schedule written down — which two strength days and which two runs,
+      at what times, on which days you're in the office
 
 → **[Phase 4](phase-4-consolidate.md)**

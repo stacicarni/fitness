@@ -14,7 +14,7 @@ two weeks.
 | Field | Answer |
 |---|---|
 | Preferred name | _____ |
-| Date of birth | Sep 26, 1986 *(confirm)* — turning 40 on Sep 26, 2026 |
+| Date of birth | **Sep 26, 1987** — turning 39 on Sep 26, 2026 ✓ |
 | Height | _____ |
 | Current weight | _____ |
 | Pre-pregnancy weight | _____ |
@@ -137,16 +137,12 @@ prolapse, painful periods, endometriosis, IBS): _____
 
 ## Section D — Feeding & nutrition 🔴
 
-**D1. How is the baby fed?**
-- [ ] Exclusively breastfeeding
-- [ ] Breastfeeding + pumping
-- [ ] Exclusively pumping
-- [ ] Combo feeding (breast + formula)
-- [ ] Exclusively formula
-- Approx. feeds or pumps per 24h: _____
-> *(This sets your calorie floor. Exclusive breastfeeding at this stage costs roughly
-> 450-500 kcal/day. It also means we do not run a real deficit yet — supply and
-> healing come first.)*
+**D1. Feeding: breastfeeding + pumping — all breastmilk.** ✓
+- Nursing sessions per 24h: _____
+- Pump sessions per 24h: _____
+- Frozen stash, roughly: _____
+> *Your calorie floor is ~2,000/day and you're eating +450-500 over maintenance for
+> supply. No real deficit until you've weaned.*
 
 **D2.** Any supply concerns? [ ] No [ ] Low supply ⚠️ [ ] Oversupply [ ] Working with an IBCLC
 
@@ -233,8 +229,8 @@ nutrition is written — no numbers vs. numbers.
 
 ## Section F — Fitness history
 
-**F1. Marathons.** You mentioned 2013 and *2027* — I'm assuming that's a typo. Which
-year was the second? _____ . Races and times if you have them: _____
+**F1. Marathons: 2013 and 2017.** ✓ Which races, and times if you have them? _____
+Best half and 10K times, if you know them: _____
 
 **F2.** Best-ever fitness point and roughly when: _____
 **F3.** Typical training in the year *before* pregnancy: _____
@@ -313,7 +309,8 @@ hand by spring?
 **H3.** Best realistic session length: [ ] 10 min [ ] 15-20 [ ] 30 [ ] 45 [ ] 60
 **H4.** Would you rather do one 40-min session or two 20-min ones? _____
 
-**H5.** Are you back at work / when? _____ Remote or in-office? _____
+**H5.** Back at work: **early December 2026.** ✓ Exact start date: _____
+Hours: _____ Remote / in-office / hybrid — which days: _____ Commute: _____
 
 **H6. Baby logistics:**
 - Stroller for walks/runs: [ ] Yes — brand/model: _____ [ ] No
@@ -349,6 +346,52 @@ still do? _____
 
 **I7.** Does your partner/support know you're doing this, and are they on board with
 protecting 30 minutes? _____
+
+---
+
+## Section K — Work & weaning 🔴
+
+You go back in early December and want to wean around then. Sequencing those is the
+whole point of [Phase 4](../plan/phase-4-consolidate.md) and
+[`nutrition/WEANING-AND-RETURN-TO-WORK.md`](../nutrition/WEANING-AND-RETURN-TO-WORK.md).
+
+**K1.** Exact first day back: _____
+**K2.** How hard is the December start date? [ ] Fixed [ ] Some flexibility [ ] Could shift
+
+**K3. Weaning — how firm is "around early December"?**
+- [ ] Firm — I want to be done before I go back
+- [ ] Soft — done by end of December is fine
+- [ ] Flexible — whenever it happens
+- [ ] I'd keep one feed (morning or bedtime) longer if I could
+
+**K4.** What's driving the wean? _____
+*(Work logistics, being done, supply, sleep, wanting your body back, medication — all
+legitimate, and the answer changes how fast we taper.)*
+
+**K5.** Have you weaned before? [ ] N/A, first baby [ ] Yes — how did it go: _____
+
+**K6. If you're not fully weaned on day one back:**
+- Lactation room at work? [ ] Yes [ ] No [ ] Don't know yet
+- Fridge or cooler? [ ] Yes [ ] No [ ] Don't know yet
+- Could you fit one midday pump? [ ] Yes [ ] Hard [ ] No
+
+**K7.** Any history of clogged ducts or mastitis? [ ] No [ ] Yes ⚠️
+*(Changes how slowly we taper.)*
+
+**K8.** Has your period returned? [ ] No [ ] Yes — since _____
+
+**K9. December schedule — the real one.** Which two days can hold a 25-minute strength
+session, and which two can hold a 25-minute run?
+| | Day | Time | Where |
+|---|---|---|---|
+| Strength 1 | _____ | _____ | _____ |
+| Strength 2 | _____ | _____ | _____ |
+| Run 1 | _____ | _____ | _____ |
+| Run 2 | _____ | _____ | _____ |
+
+**K10.** Who has the baby during each of those? _____
+
+**K11.** What worries you most about December? _____
 
 ---
 

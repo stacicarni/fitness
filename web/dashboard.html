@@ -228,6 +228,7 @@ footer{color:var(--muted);font-size:12.5px;padding:30px 0 10px;border-top:1px so
       <div><div class="k">Postpartum</div><div class="v mono" id="ppwk">wk 4</div></div>
       <div><div class="k">Phase</div><div class="v mono" id="phname">0</div></div>
       <div><div class="k">6-wk visit</div><div class="v mono" id="dday">20d</div></div>
+      <div><div class="k">Back at work</div><div class="v mono" id="workd">—</div></div>
     </div>
   </div>
 </header>
@@ -256,7 +257,7 @@ footer{color:var(--muted);font-size:12.5px;padding:30px 0 10px;border-top:1px so
 
 <script>
 /* ============ dates ============ */
-const BIRTH = new Date(2026,7,17), SIXWK = new Date(2026,8,28);
+const BIRTH = new Date(2026,7,17), SIXWK = new Date(2026,8,28), WORK = new Date(2026,11,7);
 const DAY = 864e5;
 const iso = d => d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
 const parse = s => { const [y,m,d]=s.split("-").map(Number); return new Date(y,m-1,d); };
@@ -277,12 +278,12 @@ const PHASES = [
  {n:"2",name:"Load + Impact Prep",from:"2026-10-26",to:"2026-11-22",wk:"PP wk 11–14",
   goal:"Real progressive overload, plus a deliberate on-ramp to impact. Run-readiness test in week 13.",
   cardio:"Bike intervals",strength:"3×/wk · RPE 7 · 6–8 reps"},
- {n:"3",name:"Build",       from:"2026-11-23",to:"2026-12-20",wk:"PP wk 15–18",
-  goal:"Strength gets genuinely heavy. Running returns on a walk/run ladder, if the test passed.",
+ {n:"3",name:"Build",       from:"2026-11-23",to:"2026-12-06",wk:"PP wk 15–16",
+  goal:"Two weeks, and they matter more than their length suggests — the last block before work, weaning and the holidays all land at once. Push here. Set a PR on every main lift. The milk taper starts this week too.",
   cardio:"Walk/run 2×/wk",strength:"3×/wk · RPE 7–8 · 5–6 reps"},
- {n:"4",name:"Consolidate", from:"2026-12-21",to:"2027-01-03",wk:"PP wk 19–20",
-  goal:"Not progress. Arriving on Jan 4 having not stopped.",
-  cardio:"2×/wk",strength:"2×/wk, maintenance"}
+ {n:"4",name:"Work & Wean", from:"2026-12-07",to:"2027-01-03",wk:"PP wk 17–20",
+  goal:"Back at work, finishing the wean, and the holidays — three hard transitions stacked. The goal is not progress. It is arriving on Jan 4 having not stopped.",
+  cardio:"Run 2×/wk",strength:"2×/wk, hold your Dec 6 loads"}
 ];
 const phaseOf = d => PHASES.find(p => d>=parse(p.from) && d<=parse(p.to)) || null;
 
@@ -325,9 +326,18 @@ const P0 = {
  "2026-09-20":{w:0,y:"10 min meditation",rest:1},
  "2026-09-21":{w:20,st:1},"2026-09-22":{w:25,bike:1},"2026-09-23":{w:0,y:"20 min yoga"},
  "2026-09-24":{w:25,st:1},"2026-09-25":{w:0,bike:1,alt:"or 25 min walk"},
- "2026-09-26":{w:30,note:"30 minutes continuous — the Phase 0 graduation test. Also: happy 40th."},
+ "2026-09-26":{w:30,note:"30 minutes continuous — the Phase 0 graduation test. Also: happy 39th."},
  "2026-09-27":{w:0,y:"10 min meditation",rest:1,note:"Fill in the Phase 0 exit checklist before Phase 1 starts tomorrow."}
 };
+const P4 = { /* Dec 7 → Jan 3: two strength, two runs, never zero */
+ 1:{k:"A",min:1},2:{k:"run",t:"Run/walk",d:"See the ladder — wk 17 is 5 × (3 min jog / 2 min walk)."},
+ 3:{k:"rest",t:"The Reset only",d:"That is the whole session today. It counts."},
+ 4:{k:"C",min:1},5:{k:"rest",t:"Reset + a walk",d:"Ten minutes is enough."},
+ 6:{k:"run",t:"Run/walk",d:"Ohlone Greenway. Easy pace, full sentences."},
+ 0:{k:"rest",t:"Rest",d:"Actually rest."}
+};
+const MIN5 = [["Goblet squat","3 × 8"],["Single-arm DB row","3 × 8/side"],["DB floor press","3 × 8"],
+              ["DB Romanian deadlift","3 × 8"],["Farmer carry","3 × 40 sec"]];
 const WEEKDAY = { /* phase 1–3 template by day index (0=Sun) */
  1:{k:"A"},2:{k:"cardio",t:"Bike Zone 2 + walk",d:"Conversational the whole way. 20 min, building 2–3 min a week."},
  3:{k:"B"},4:{k:"yoga",t:"Peloton yoga / mobility + walk",d:"20–30 min. Slow flow or postnatal."},
@@ -352,7 +362,14 @@ function sessionFor(d){
       : (p.w>=30 ? "The 30-minute walk" : (p.st ? "Reset + seeds + walk" : (p.w? "Reset + "+p.w+" min walk" : "Reset + Peloton")));
     return {ph,title,note:p.note,blocks:b};
   }
-  const t = WEEKDAY[d.getDay()];
+  const t = (ph.n==="4" ? P4 : WEEKDAY)[d.getDay()];
+  if(t.min){
+    return {ph,title:"Strength — full body, 25 min",
+      note:"Hold your Dec 6 loads. Do not chase PRs this month — two sessions a week at your existing loads holds everything you built.",
+      blocks:[{h:"Five movements, no accessories",
+        items:MIN5.map((r,i)=>({k:"m"+i,b:r[0],d:"",n:r[1]}))},
+        {h:"Finish",items:[{k:"reset_s",b:"The Reset",d:"Breath and pelvic floor at minimum.",n:"5 min"}]}]};
+  }
   if(t.k==="A"||t.k==="B"||t.k==="C"){
     const L=LIFTS[t.k];
     return {ph,title:L.t,blocks:[
@@ -452,7 +469,6 @@ const Y3=["Yes","No","Not sure"], FREQ=["Not at all","Sometimes","Often","Most o
 const SURVEY=[
  {L:"A",n:"Baseline",q:[
   {i:"a_name",t:"text",q:"Preferred name"},
-  {i:"a_dob",t:"one",q:"Date of birth — Sep 26, 1986?",o:["Correct","Different — I'll note it below"]},
   {i:"a_ht",t:"text",q:"Height"},
   {i:"a_wt",t:"text",q:"Current weight",h:"Sets your protein target and calorie floor. Skip it if you'd rather — say so below."},
   {i:"a_prewt",t:"text",q:"Pre-pregnancy weight"},
@@ -488,8 +504,9 @@ const SURVEY=[
   {i:"c_prior",t:"long",q:"Any pelvic floor issues before or during pregnancy?",h:"Leaking while running, prolapse, painful periods, endometriosis, IBS."},
   {i:"c_first",t:"one",q:"Is this your first baby?",o:["Yes","No"]}]},
  {L:"D",n:"Feeding & nutrition",f:1,q:[
-  {i:"d_feed",t:"one",q:"How is the baby fed?",f:1,o:["Exclusively breastfeeding","Breastfeeding + pumping","Exclusively pumping","Combo — breast + formula","Exclusively formula"],
-   h:"This sets your calorie floor. Exclusive breastfeeding costs roughly 450–500 kcal/day, and means we do not run a real deficit yet."},
+  {i:"d_sess",t:"text",q:"Nursing sessions and pumps per 24 hours",
+   h:"Breastfeeding + pumping, all breastmilk. Your floor is about 2,000 kcal/day, eating +450–500 over maintenance for supply. No real deficit until you've weaned."},
+  {i:"d_stash",t:"text",q:"Frozen stash, roughly"},
   {i:"d_supply",t:"one",q:"Any supply concerns?",o:["No","Low supply","Oversupply","Working with an IBCLC"]},
   {i:"d_day",t:"long",q:"A typical day of eating right now",h:"Be honest. 'Half a bagel standing up' is a legitimate and useful answer."},
   {i:"d_prot",t:"one",q:"Roughly how much protein are you getting?",o:["No idea","Not much","Some at dinner only","Decent at 2 meals","30g+ at 3–4 points a day"]},
@@ -525,7 +542,8 @@ const SURVEY=[
   {i:"e_hist",t:"long",q:"History of depression, anxiety, or PMDD before pregnancy? In therapy or on medication now?"},
   {i:"e_support",t:"long",q:"Who can hold the baby for 30 minutes?"}]},
  {L:"F",n:"Fitness history",q:[
-  {i:"f_mara",t:"text",q:"You said marathons in 2013 and 2027 — which year was the second?",h:"Assuming a typo. Times too, if you have them."},
+  {i:"f_mara",t:"text",q:"Marathons in 2013 and 2017 — which races, and times if you have them?"},
+  {i:"f_pr",t:"text",q:"Best half and 10K times, if you know them"},
   {i:"f_peak",t:"long",q:"Your best-ever fitness point, and roughly when"},
   {i:"f_before",t:"long",q:"Typical training in the year before pregnancy"},
   {i:"f_during",t:"long",q:"What did you do during pregnancy, and until how many weeks?"},
@@ -548,7 +566,7 @@ const SURVEY=[
   {i:"h_freq",t:"one",q:"Sessions a week you'd actually commit to",o:["2","3","4","5","6"]},
   {i:"h_len",t:"one",q:"Best realistic session length",o:["10 min","15–20 min","30 min","45 min","60 min"]},
   {i:"h_split",t:"one",q:"One 40-minute session or two 20-minute ones?",o:["One longer","Two shorter","Depends on the day"]},
-  {i:"h_work",t:"text",q:"Back at work when? Remote or in-office?"},
+  {i:"h_work",t:"text",q:"Back at work early December — exact start date, hours, and which days in office?"},
   {i:"h_stroll",t:"text",q:"Stroller — brand and model?",h:"Jogging with the baby in one is a 6–8 month thing for their neck, separate from your own readiness."},
   {i:"h_carrier",t:"one",q:"Baby carrier?",o:["Yes","No"],h:"Carrier walking loads the pelvic floor differently than a stroller."},
   {i:"h_room",t:"one",q:"Can you train with the baby in the room?",o:["Yes","Only sometimes","No"]},
@@ -567,6 +585,23 @@ const SURVEY=[
   {i:"i_min",t:"long",q:"On a day where everything falls apart, what's the smallest thing you'd still do?"},
   {i:"i_coach",t:"one",q:"How do you want to be coached?",o:["Gentle","Direct","Push me","Data, no pep talk"]},
   {i:"i_partner",t:"one",q:"Does your partner know about this and are they on board with protecting 30 minutes?",o:Y3}]},
+ {L:"K",n:"Work & weaning",f:1,q:[
+  {i:"k_start",t:"text",q:"Exact first day back"},
+  {i:"k_fixed",t:"one",q:"How hard is that date?",o:["Fixed","Some flexibility","Could shift"]},
+  {i:"k_firm",t:"one",q:"How firm is 'wean around early December'?",f:1,
+   o:["Firm — done before I go back","Soft — done by end of December","Flexible — whenever","I'd keep one feed longer if I could"],
+   h:"A gradual taper takes 3–4 weeks and is much easier on mood and on your breasts than a fast one. Starting around Nov 23 lands you weaned right as you go back."},
+  {i:"k_why",t:"long",q:"What's driving the wean?",
+   h:"Work logistics, being done, supply, sleep, wanting your body back, medication — all legitimate, and it changes how fast we taper."},
+  {i:"k_before",t:"one",q:"Have you weaned before?",o:["First baby","Yes — went fine","Yes — it was hard"]},
+  {i:"k_room",t:"one",q:"If you're not done by day one — is there a lactation room and fridge at work?",o:["Yes to both","Room but no fridge","Neither","Don't know yet"]},
+  {i:"k_midday",t:"one",q:"Could you fit one midday pump at work?",o:["Yes","Hard","No"]},
+  {i:"k_clog",t:"one",q:"Any history of clogged ducts or mastitis?",f:1,o:["No","Yes"],h:"Changes how slowly we taper."},
+  {i:"k_period",t:"one",q:"Has your period returned?",o:["No","Yes"]},
+  {i:"k_sched",t:"long",q:"December, for real: which two days hold a 25-min strength session, and which two hold a 25-min run?",
+   h:"Day, time, and where. The Metro510 gym removes the commute from the workout — 25 minutes downstairs is a real session."},
+  {i:"k_who",t:"text",q:"Who has the baby during each of those?"},
+  {i:"k_worry",t:"long",q:"What worries you most about December?"}]},
  {L:"J",n:"Medical",f:1,q:[
   {i:"j_cond",t:"many",q:"Conditions",f:1,o:["None","Hypertension","Gestational diabetes","Preeclampsia","Thyroid","PCOS","Asthma","Autoimmune","Migraines","Heart condition","Clotting disorder","Other"]},
   {i:"j_meds",t:"long",q:"Current medications"},
@@ -630,6 +665,14 @@ function renderPlan(){
   el.innerHTML=
    '<div><span class="eyebrow">Roadmap</span><h2 class="head" style="margin-top:4px">Sep 8, 2026 → Jan 3, 2027</h2>'
    +'<p class="lede">Seventeen weeks, five phases. Each one earns the next — the exit checklist is the gate, not the calendar.</p></div>'
+   +'<div class="panel" style="border-color:var(--sand)"><div class="ph" style="background:var(--sand-soft)">'
+     +'<h3>December is the pinch point, not November</h3><span class="cnt mono">Dec 7</span></div><div class="pb">'
+     +'<p style="margin:0;font-size:14.5px;color:var(--ink-2)">Back to work, finishing the wean, and the holidays all land in the same four weeks — '
+     +'three hard transitions stacked, in the darkest month of the year, on a body recalibrating its hormones. So the plan '
+     +'<b>front-loads the hard training into November</b> and drops to maintenance from Dec 7 on purpose. Two strength sessions '
+     +'and two runs a week holds everything you built; chasing more while sleep-deprived and newly back at work is how people get '
+     +'hurt or quit. The rule for December is <b>never zero</b> — missing a session is normal, missing a week is what breaks a routine.</p>'
+     +'</div></div>'
    +'<div class="panel"><div class="scroll"><table><thead><tr>'
      +'<th>Phase</th><th>Dates</th><th>PP weeks</th><th>Cardio</th><th>Strength</th></tr></thead><tbody>'
      + PHASES.map(p=>'<tr class="'+(now&&now.n===p.n?"now":"")+'">'
@@ -644,15 +687,15 @@ function renderPlan(){
    +'<div class="panel"><div class="ph"><h3>Fixed dates</h3></div><div class="scroll"><table><tbody>'
      +[["Tue Sep 8","Start. The Reset + a 10 minute walk."],
        ["Mon Sep 14","Strength seeds begin"],
-       ["Sat Sep 26","You turn 40"],
+       ["Sat Sep 26","You turn 39"],
        ["Mon Sep 28","6-week mark · clearance visit · Phase 1 starts"],
        ["Mon Oct 19","Deload week"],
        ["Mon Oct 26","Phase 2 · the impact ladder begins"],
        ["Mon Nov 9","12-week mark · run-readiness test"],
        ["Mon Nov 16","Deload week"],
-       ["Mon Nov 23","Phase 3 · walk/run begins if you passed"],
-       ["Mon Dec 14","Deload week"],
-       ["Mon Dec 21","Phase 4 · holiday minimum"],
+       ["Mon Nov 23","Phase 3 · walk/run begins if you passed · start the milk taper"],
+       ["Mon Dec 7","Phase 4 · back at work · weaning finishing · drop to maintenance"],
+       ["Mon Dec 28","Deload week"],
        ["Mon Jan 4","The forever template begins"]]
        .map(r=>'<tr><td class="n" style="width:120px">'+r[0]+'</td><td>'+r[1]+'</td></tr>').join("")
      +'</tbody></table></div></div>'
@@ -684,13 +727,32 @@ function renderFuel(){
      +'gives you stalled healing, low supply, no energy, no training adaptation — and because your body protects milk production first, '
      +'you lose muscle rather than fat. Body composition is a 2027 project, and it works far better then. Through 2026 the goal is one word: '
      +'<b>enough</b>.</p></div></div>'
-   +'<div class="panel"><div class="ph"><h3>Calorie floor by feeding method</h3></div><div class="scroll"><table><thead><tr>'
-     +'<th>Feeding</th><th>Add to maintenance</th><th>Do not go below</th></tr></thead><tbody>'
-     +'<tr><td>Exclusively breastfeeding</td><td class="n">+450–500 kcal</td><td class="n">~2,000 kcal</td></tr>'
-     +'<tr><td>Combo feeding</td><td class="n">+250–350 kcal</td><td class="n">~1,900 kcal</td></tr>'
-     +'<tr><td>Not breastfeeding</td><td class="n">+0</td><td class="n">~1,700 kcal</td></tr>'
-     +'</tbody></table></div><div class="pb"><div class="note">If breastfeeding, cap weight change at about <b>1 lb a week</b>. '
-     +'Faster is the most common cause of a supply drop, and it is not fat coming off any faster.</div></div></div>'
+   +'<div class="panel"><div class="ph"><h3>Your numbers, and where they go in December</h3>'
+     +'<span class="cnt mono">breastmilk → weaned</span></div><div class="scroll"><table><thead><tr>'
+     +'<th>Milk output</th><th>Add to maintenance</th><th>Roughly when</th></tr></thead><tbody>'
+     +'<tr class="now"><td>Full supply — where you are</td><td class="n">+450–500 kcal</td><td class="n">now → Nov 23</td></tr>'
+     +'<tr><td>About two thirds</td><td class="n">+300 kcal</td><td class="n">late Nov</td></tr>'
+     +'<tr><td>About one third</td><td class="n">+150 kcal</td><td class="n">early Dec</td></tr>'
+     +'<tr><td>Weaned</td><td class="n">+0</td><td class="n">mid–late Dec</td></tr>'
+     +'</tbody></table></div><div class="pb stack">'
+     +'<div class="note">Maintenance is roughly <b>bodyweight in lb × 14–15</b>. Your floor right now is about '
+     +'<b>2,000 kcal a day</b> — a floor, not a target. Under it while making a full supply hits milk first, then muscle, then mood. '
+     +'Cap weight change at about <b>1 lb a week</b> while lactating.</div>'
+     +'<div class="alarm"><b>The calorie handoff is the part people miss.</b> Milk costs you 450–500 kcal a day. '
+     +'When it stops, that cost stops — and if your intake doesn\'t follow it down, you are suddenly eating a 500 kcal '
+     +'surplus daily without changing a thing. Taper the food on the same slope as the milk, not all at once at the end. '
+     +'Cut roughly 100–150 kcal per session you drop, and keep the protein.</div></div></div>'
+   +'<div class="panel"><div class="ph"><h3>Weaning — the training-relevant parts</h3><span class="cnt mono">Nov 23 → Dec 21</span></div>'
+     +'<div class="pb tight"><ul class="check" style="pointer-events:none">'
+     +[["Drop one session every 4–5 days","Start around Nov 23. A gradual taper takes 3–4 weeks and lands you weaned right as you go back. Keep the bedtime and first-morning feeds for last."],
+       ["If it hurts, you\'re going too fast","Express just enough for comfort, never a full empty — that signals for more. A red, painful, feverish breast is mastitis and needs a provider, not patience."],
+       ["Expect a mood dip around the last few drops","Prolactin and oxytocin fall before estrogen fully rebounds. It is hormonal, temporary, and worse with a fast wean. Knowing it is coming is most of the work."],
+       ["Your appetite will lag by a couple of weeks","Lactation hunger doesn\'t switch off the day the milk does. Eat on structure rather than signal for those two weeks — four protein anchors, the plate, stop."],
+       ["Connective tissue firms up","Relaxin-related laxity fades as estrogen returns. January running will feel more stable than December running."],
+       ["Bone density recovers — loading speeds it up","Six months of breastfeeding costs 3–5% of bone mineral and it comes back after weaning. Keep the two strength sessions and the calcium going through the wean and past it. This is the strongest argument for not letting December go to zero."],
+       ["Water drops back to 2.5–3 L","From the 3.5–4 L you need now."]]
+       .map(r=>'<li><div class="txt"><b>'+r[0]+'</b><span>'+r[1]+'</span></div></li>').join("")
+     +'</ul></div></div>'
    +'<div class="panel"><div class="ph"><h3>Protein — the one number worth tracking</h3><span class="cnt mono">0.7–0.9 g/lb</span></div><div class="pb">'
      +'<p style="margin:0 0 12px;font-size:14.5px;color:var(--ink-2)">For most women that lands at <b>110–150 g a day</b> — more than it sounds like, '
      +'and almost certainly more than a day of one-handed eating delivers. Don\'t try to hit it at dinner. Anchor <b>30–40 g at four points</b>.</p>'
@@ -702,9 +764,9 @@ function renderFuel(){
        .map(r=>'<tr><td class="n">'+r[0]+'</td><td>'+r[1]+'</td></tr>').join("")
      +'</tbody></table></div></div></div>'
    +'<div class="panel"><div class="ph"><h3>Water</h3></div><div class="pb">'
-     +'<p style="margin:0;font-size:14.5px;color:var(--ink-2)">Baseline 2.5–3 L. <b>Breastfeeding adds about a litre</b> → 3.5–4 L a day, '
-     +'plus 500–750 ml around training. Practical version: a 32 oz bottle at every feeding station, and you drink one '
-     +'<b>during</b> every feed — thirst hits hard mid-letdown, which makes it the easiest habit to attach it to.</p></div></div>'
+     +'<p style="margin:0;font-size:14.5px;color:var(--ink-2)"><b>3.5–4 L a day</b> while you\'re making milk — baseline 2.5–3 L plus about a litre — '
+     +'and another 500–750 ml around training. Practical version: a 32 oz bottle at every place you feed or pump, and you drink one '
+     +'<b>during</b> every session. Thirst hits hardest mid-letdown, which makes it the easiest habit to attach to.</p></div></div>'
    +'<div class="panel"><div class="ph"><h3>What actually matters, and why</h3></div><div class="scroll"><table><thead><tr>'
      +'<th>Nutrient</th><th>Why here</th><th>Where</th></tr></thead><tbody>'
      +[["Iron","Blood loss plus pregnancy depletion. Low ferritin feels exactly like new-parent exhaustion and blunts every training adaptation.","Red meat, lentils, spinach + vitamin C"],
@@ -724,7 +786,7 @@ function renderFuel(){
      +'</ul></div></div>'
    +'<div class="panel"><div class="ph"><h3>Supplements</h3></div><div class="pb stack">'
      +'<div><span class="eyebrow">Worth it</span><p style="margin:4px 0 0;font-size:14.5px;color:var(--ink-2)">Prenatal (keep going), vitamin D, omega-3, magnesium glycinate at night for sleep and cramps, protein powder as a convenience.</p></div>'
-     +'<div><span class="eyebrow">Wait</span><p style="margin:4px 0 0;font-size:14.5px;color:var(--ink-2)">Creatine — genuinely good for you and well-supported for women around 40, but the lactation data is thin. Revisit when you wean, or ask your provider.</p></div>'
+     +'<div><span class="eyebrow">On the January list</span><p style="margin:4px 0 0;font-size:14.5px;color:var(--ink-2)">Creatine — well-supported for women, but the lactation data is thin. Once you\'ve weaned, 3–5 g a day is one of the better-evidenced things you can add, and it lands exactly on your real build month.</p></div>'
      +'<div><span class="eyebrow">Skip</span><p style="margin:4px 0 0;font-size:14.5px;color:var(--ink-2)">Anything marketed as postpartum weight loss, detox teas, appetite suppressants, fat burners. All contraindicated while breastfeeding and most contraindicated generally.</p></div>'
    +'</div></div>'
    +'<div class="panel"><div class="ph"><h3>The actual bottleneck</h3></div><div class="pb">'
@@ -798,6 +860,8 @@ function setStamp(){
   document.getElementById("phname").textContent=ph?ph.n:"—";
   const dd=Math.round((SIXWK-today)/DAY);
   document.getElementById("dday").textContent = dd>0? dd+"d" : (dd===0?"today":"done");
+  const wd=Math.round((WORK-today)/DAY);
+  document.getElementById("workd").textContent = wd>0? wd+"d" : "here";
   document.getElementById("subline").textContent =
     "Postpartum training & nutrition · day "+ppDay(today)+" · "+today.toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"});
 }
@@ -863,7 +927,8 @@ document.addEventListener("keydown",e=>{
 });
 
 /* first paint from local cache, then upgrade from the store */
-SURVEY_A = LS.get("intake/survey") || {};
+const KNOWN = {a_track:"", h_work:"Early December 2026"};
+SURVEY_A = Object.assign({}, KNOWN, LS.get("intake/survey") || {});
 for(let i=-21;i<=7;i++){ const k=iso(new Date(today.getTime()+i*DAY)); const v=LS.get("log/"+k); if(v) LOG[k]=v; }
 setStamp(); renderToday(); renderIntake(); renderPlan(); renderFuel(); renderWatch();
 
@@ -872,7 +937,7 @@ setStamp(); renderToday(); renderIntake(); renderPlan(); renderFuel(); renderWat
   if(!db){ flag("Saved on this device.",false); return; }
   try{
     const s = await db.doc("intake/survey").get();
-    if(s.exists){ SURVEY_A = Object.assign({}, s.data()); delete SURVEY_A.updatedAt;
+    if(s.exists){ SURVEY_A = Object.assign({}, KNOWN, s.data()); delete SURVEY_A.updatedAt;
                   LS.set("intake/survey",SURVEY_A); renderIntake(); }
     const days=[]; for(let i=-21;i<=7;i++) days.push(iso(new Date(today.getTime()+i*DAY)));
     const got = await Promise.all(days.map(k=>db.doc("log/"+k).get().catch(()=>null)));

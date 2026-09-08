@@ -164,7 +164,7 @@ saddle helps. Build 10 → 15 → 20 min over a week before adding any resistanc
 | Sat | Reset + 20 min walk + 10 min stretch |
 | Sun | Reset + meditation. Rest. |
 
-### PP Week 6 · Sep 21-27 — *(40th birthday Sat Sep 26)*
+### PP Week 6 · Sep 21-27 — *(39th birthday Sat Sep 26)*
 | Day | Session |
 |---|---|
 | Mon | Reset + Strength seeds (add 1 set to sit-to-stand + wall push-up) + 20 min walk |
@@ -172,7 +172,7 @@ saddle helps. Build 10 → 15 → 20 min over a week before adding any resistanc
 | Wed | Reset + 20 min Peloton yoga |
 | Thu | Reset + Strength seeds + 25 min walk |
 | Fri | Reset + bike 12-15 min *or* 25 min walk |
-| Sat | **30 min continuous walk** — the Phase 0 graduation test |
+| Sat | **30 min continuous walk** — the Phase 0 graduation test. Happy birthday. |
 | Sun | Reset + meditation. Fill out the Phase 0 review below. |
 
 ---

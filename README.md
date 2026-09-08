@@ -12,7 +12,10 @@ you keep for years.
 | **Today** | Tue, Sep 8, 2026 |
 | **Postpartum age** | 3 weeks + 1 day (start of PP week 4) |
 | **Birth** | Vaginal / unmedicated ("natural") |
-| **Your age** | 39 → **40 on Sep 26, 2026** |
+| **Your age** | 38 → **39 on Sep 26, 2026** |
+| **Feeding** | Breastfeeding + pumping (all breastmilk) |
+| **Back at work** | Early December 2026 |
+| **Weaning target** | Around the same time |
 | **6-week mark** | **Mon, Sep 28, 2026** |
 | **12-week mark** | Mon, Nov 9, 2026 |
 | **Current phase** | **Phase 0 — Reconnect** |
@@ -32,10 +35,10 @@ you keep for years.
 ## The arc through the rest of 2026
 
 ```
-Sep 7 ───────── Sep 28 ───────── Oct 26 ───────── Nov 23 ───── Dec 21 ── Jan 4
-   PHASE 0        PHASE 1          PHASE 2          PHASE 3      PHASE 4    │
-  Reconnect    Rebuild Base    Load + Impact Prep    Build     Consolidate  │
-   PP wk 4-6     PP wk 7-10       PP wk 11-14      PP wk 15-18  PP wk 19-20 │
+Sep 7 ───────── Sep 28 ───────── Oct 26 ───────── Nov 23 ── Dec 7 ─────── Jan 4
+   PHASE 0        PHASE 1          PHASE 2         PHASE 3    PHASE 4       │
+  Reconnect    Rebuild Base    Load + Impact Prep   Build    Work & Wean    │
+   PP wk 4-6     PP wk 7-10       PP wk 11-14     PP wk 15-16  PP wk 17-20  │
                                                                             ▼
                                                             The forever template
                                                                   (2027+)
@@ -52,6 +55,10 @@ Sep 7 ───────── Sep 28 ───────── Oct 26 ─�
   In much of Europe it is standard postpartum care; in the US you usually have to
   ask. It is the single highest-value thing you can do for the next 12 months of
   training. Kaiser and Sutter both have pelvic health PT in the East Bay.
+- **December is the pinch point, not November.** Returning to work, weaning, and the
+  holidays all land in the same four weeks. The plan front-loads the hard training
+  before then and deliberately drops to maintenance from Dec 7 — see
+  [`nutrition/WEANING-AND-RETURN-TO-WORK.md`](nutrition/WEANING-AND-RETURN-TO-WORK.md).
 - **Running is not the first thing back. It is one of the last.** See
   [`reference/RETURN-TO-RUNNING.md`](reference/RETURN-TO-RUNNING.md). Target window
   is 12-16 weeks postpartum (Nov-Dec), gated by a test, not a date.
