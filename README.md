@@ -70,3 +70,15 @@ This is a structured training and nutrition plan, not medical advice. It is buil
 from mainstream postpartum rehab practice (Goom/Donnelly/Brockwell return-to-running
 guidelines, ACOG activity guidance, standard pelvic health progressions). Your OB,
 midwife, or pelvic floor PT overrules anything in here.
+
+## The interactive version
+
+`web/dashboard.html` is published as a private Artifact:
+**https://claude.ai/code/artifact/2933df1e-3b03-4719-83b3-952619d20001**
+
+Today's session with checkboxes, the intake survey (saves as you type), the roadmap,
+nutrition, and the safety reference. It's the same content as this repo, in the form
+you'd actually use at 6am with a baby on one arm.
+
+The file is an Artifact fragment — no `<!doctype>`/`<html>` wrapper, since the platform
+adds one at publish time. To change it, edit the file and republish to the same URL.

@@ -1,0 +1,885 @@
+<title>Rebuild Season</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --paper:#F2F2F4; --card:#FFFFFF; --card-2:#FAFAFC;
+  --ink:#1A1B21; --ink-2:#4A4C57; --muted:#7A7C88;
+  --line:#E2E2E9; --line-2:#CDCDD8;
+  --accent:#33456B; --accent-soft:#E7ECF6; --accent-ink:#2A3A5C;
+  --sand:#9E6A28; --sand-soft:#F6EEE0;
+  --go:#2E7D4F; --hold:#A87227; --stop:#AC372D;
+  --go-soft:#E3F0E8; --hold-soft:#F7EEDE; --stop-soft:#F9E7E4;
+  --shadow:0 1px 2px rgba(26,27,33,.05), 0 8px 24px -16px rgba(26,27,33,.28);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#131419; --card:#1C1E25; --card-2:#22242C;
+  --ink:#EDEDF2; --ink-2:#BCBDC9; --muted:#8A8C9A;
+  --line:#2A2C36; --line-2:#3B3E4C;
+  --accent:#93A9DE; --accent-soft:#232839; --accent-ink:#AFC0EA;
+  --sand:#D9A45E; --sand-soft:#2C2519;
+  --go:#75C291; --hold:#D9A45E; --stop:#E48375;
+  --go-soft:#1A2A21; --hold-soft:#2B2519; --stop-soft:#2E1E1C;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.7);
+}}
+:root[data-theme="dark"]{
+  --paper:#131419; --card:#1C1E25; --card-2:#22242C;
+  --ink:#EDEDF2; --ink-2:#BCBDC9; --muted:#8A8C9A;
+  --line:#2A2C36; --line-2:#3B3E4C;
+  --accent:#93A9DE; --accent-soft:#232839; --accent-ink:#AFC0EA;
+  --sand:#D9A45E; --sand-soft:#2C2519;
+  --go:#75C291; --hold:#D9A45E; --stop:#E48375;
+  --go-soft:#1A2A21; --hold-soft:#2B2519; --stop-soft:#2E1E1C;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.7);
+}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);
+  font:400 16px/1.55 "IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  -webkit-font-smoothing:antialiased;padding-bottom:64px}
+h1,h2,h3{font-family:Newsreader,Georgia,serif;font-weight:500;text-wrap:balance;margin:0}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
+.wrap{max-width:760px;margin:0 auto;padding:0 18px}
+
+/* ---- masthead ---- */
+header{background:var(--card);border-bottom:1px solid var(--line)}
+.mast{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;
+  flex-wrap:wrap;padding:22px 0 16px}
+.mast h1{font-size:31px;letter-spacing:-.015em;line-height:1.1}
+.mast .sub{color:var(--muted);font-size:13px;margin-top:3px}
+.stamp{display:flex;gap:22px;flex-wrap:wrap}
+.stamp div{text-align:right}
+.stamp .k{font-size:10.5px;text-transform:uppercase;letter-spacing:.11em;color:var(--muted)}
+.stamp .v{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;
+  font-size:19px;font-weight:500;color:var(--accent-ink);line-height:1.25}
+
+/* ---- tabs ---- */
+nav{position:sticky;top:0;z-index:20;background:var(--card);border-bottom:1px solid var(--line)}
+.tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tabs button{flex:0 0 auto;background:none;border:0;border-bottom:2px solid transparent;
+  padding:13px 14px;font:500 13.5px/1 "IBM Plex Sans",sans-serif;color:var(--muted);
+  cursor:pointer;letter-spacing:.01em;white-space:nowrap}
+.tabs button:hover{color:var(--ink-2)}
+.tabs button[aria-selected="true"]{color:var(--accent-ink);border-bottom-color:var(--accent)}
+.tabs button:focus-visible{outline:2px solid var(--accent);outline-offset:-3px;border-radius:3px}
+
+main{padding-top:26px}
+section[role="tabpanel"]{display:flex;flex-direction:column;gap:18px}
+h2.head{font-size:23px;letter-spacing:-.01em}
+.lede{color:var(--ink-2);font-size:14.5px;max-width:64ch}
+.eyebrow{font-size:10.5px;text-transform:uppercase;letter-spacing:.13em;color:var(--muted);
+  font-weight:600;font-family:"IBM Plex Sans",sans-serif}
+
+/* ---- panels ---- */
+.panel{background:var(--card);border:1px solid var(--line);border-radius:10px;
+  box-shadow:var(--shadow);overflow:hidden}
+.panel > .ph{display:flex;align-items:baseline;justify-content:space-between;gap:12px;
+  padding:14px 18px;border-bottom:1px solid var(--line);background:var(--card-2)}
+.panel > .ph h3{font-size:17px}
+.pb{padding:16px 18px}
+.pb.tight{padding:6px 18px 14px}
+
+/* ---- checklist ---- */
+ul.check{list-style:none;margin:0;padding:0}
+ul.check li{display:flex;gap:13px;align-items:flex-start;padding:11px 0;
+  border-bottom:1px solid var(--line)}
+ul.check li:last-child{border-bottom:0}
+ul.check input[type=checkbox]{flex:0 0 auto;width:21px;height:21px;margin:1px 0 0;
+  accent-color:var(--accent);cursor:pointer}
+ul.check .txt{flex:1;min-width:0}
+ul.check .txt b{font-weight:600;font-size:15px;display:block}
+ul.check .txt span{color:var(--muted);font-size:13.5px;display:block;margin-top:1px}
+ul.check li.done .txt b{color:var(--muted);text-decoration:line-through;
+  text-decoration-color:var(--line-2)}
+.dose{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;
+  font-size:12.5px;color:var(--accent-ink);background:var(--accent-soft);
+  padding:2px 7px;border-radius:4px;white-space:nowrap;align-self:flex-start;margin-top:2px}
+
+/* ---- week strip ---- */
+.strip{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
+.strip a{display:block;text-align:center;padding:9px 2px 10px;border-radius:7px;
+  border:1px solid var(--line);background:var(--card-2);text-decoration:none;color:var(--ink-2);
+  cursor:pointer}
+.strip a .d{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.strip a .n{font-family:"IBM Plex Mono",monospace;font-size:16px;font-weight:500;
+  font-variant-numeric:tabular-nums;line-height:1.4}
+.strip a.today{border-color:var(--accent);background:var(--accent-soft);color:var(--accent-ink)}
+.strip a.today .d{color:var(--accent-ink)}
+.strip a.filled{border-color:var(--go);background:var(--go-soft)}
+.strip a.filled .n{color:var(--go)}
+
+/* ---- tiers ---- */
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.tier{border:1px solid var(--line);border-radius:8px;padding:10px 11px;cursor:pointer;
+  background:var(--card-2);text-align:left;font:inherit;color:var(--ink)}
+.tier b{display:block;font-size:14px;font-weight:600}
+.tier span{display:block;font-size:11.5px;color:var(--muted);line-height:1.35;margin-top:2px}
+.tier[aria-pressed="true"].g{border-color:var(--go);background:var(--go-soft)}
+.tier[aria-pressed="true"].y{border-color:var(--hold);background:var(--hold-soft)}
+.tier[aria-pressed="true"].r{border-color:var(--stop);background:var(--stop-soft)}
+.tier:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+
+/* ---- fields ---- */
+.fieldrow{display:flex;gap:12px;align-items:center;padding:10px 0;
+  border-bottom:1px solid var(--line);flex-wrap:wrap}
+.fieldrow:last-child{border-bottom:0}
+.fieldrow label{flex:1;min-width:140px;font-size:14.5px}
+.fieldrow .hint{display:block;color:var(--muted);font-size:12.5px;margin-top:1px}
+input[type=text],input[type=number],textarea,select{
+  font:400 15px/1.4 "IBM Plex Sans",sans-serif;color:var(--ink);background:var(--card-2);
+  border:1px solid var(--line-2);border-radius:7px;padding:8px 10px;width:100%}
+input[type=number]{font-family:"IBM Plex Mono",monospace;max-width:110px;text-align:right}
+textarea{min-height:74px;resize:vertical}
+input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid var(--accent);
+  outline-offset:1px;border-color:var(--accent)}
+.numwrap{flex:0 0 auto;display:flex;align-items:center;gap:7px;font-size:13.5px;color:var(--muted)}
+.numwrap input[type=number]{width:92px}
+
+/* ---- chips ---- */
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid var(--line-2);background:var(--card-2);border-radius:999px;
+  padding:6px 13px;font:400 13.5px/1.3 "IBM Plex Sans",sans-serif;color:var(--ink-2);
+  cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+:root[data-theme="dark"] .chip[aria-pressed="true"],
+:root:not([data-theme="light"]) .chip[aria-pressed="true"]{color:var(--paper)}
+.chip.flag[aria-pressed="true"]{background:var(--stop);border-color:var(--stop);color:#fff}
+.chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* ---- survey ---- */
+.sect{background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;
+  box-shadow:var(--shadow)}
+.sect > button.sh{width:100%;display:flex;align-items:center;gap:12px;padding:14px 16px;
+  background:var(--card-2);border:0;border-bottom:1px solid transparent;cursor:pointer;
+  text-align:left;font:inherit;color:var(--ink)}
+.sect.open > button.sh{border-bottom-color:var(--line)}
+.sect .letter{font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:500;
+  width:24px;height:24px;flex:0 0 auto;display:grid;place-items:center;border-radius:5px;
+  background:var(--accent-soft);color:var(--accent-ink)}
+.sect .sname{flex:1;font-family:Newsreader,Georgia,serif;font-size:17.5px;font-weight:500}
+.sect .cnt{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--muted);
+  font-variant-numeric:tabular-nums}
+.sect .caret{color:var(--muted);font-size:12px;transition:transform .18s}
+.sect.open .caret{transform:rotate(90deg)}
+.sect .sbody{display:none;padding:4px 16px 16px}
+.sect.open .sbody{display:block}
+.q{padding:14px 0;border-bottom:1px solid var(--line)}
+.q:last-child{border-bottom:0}
+.q .qt{font-size:14.5px;font-weight:500;margin-bottom:8px;display:block}
+.q .qh{font-size:12.5px;color:var(--muted);font-weight:400;margin:-4px 0 8px;display:block}
+.q.flagged .qt::after{content:"changes the plan";font-family:"IBM Plex Sans",sans-serif;
+  font-size:10px;text-transform:uppercase;letter-spacing:.09em;font-weight:600;
+  color:var(--stop);background:var(--stop-soft);padding:2px 6px;border-radius:4px;
+  margin-left:8px;white-space:nowrap;display:inline-block;vertical-align:1px}
+.note{background:var(--sand-soft);border-left:3px solid var(--sand);padding:11px 14px;
+  border-radius:0 7px 7px 0;font-size:13.5px;color:var(--ink-2)}
+.note b{color:var(--ink)}
+.alarm{background:var(--stop-soft);border-left:3px solid var(--stop);padding:11px 14px;
+  border-radius:0 7px 7px 0;font-size:13.5px;color:var(--ink-2)}
+.alarm b{color:var(--stop)}
+
+/* ---- progress ---- */
+.bar{height:5px;background:var(--line);border-radius:3px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--accent);border-radius:3px;
+  transition:width .3s ease}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* ---- tables ---- */
+.scroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:420px}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:10.5px;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);
+  font-weight:600;background:var(--card-2)}
+td.n{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr.now td{background:var(--accent-soft)}
+tr.now td:first-child{font-weight:600;color:var(--accent-ink)}
+
+/* ---- misc ---- */
+.rowbtns{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.btn{border:1px solid var(--line-2);background:var(--card-2);color:var(--ink);
+  border-radius:7px;padding:8px 14px;font:500 13.5px/1 "IBM Plex Sans",sans-serif;cursor:pointer}
+.btn:hover{border-color:var(--accent);color:var(--accent-ink)}
+.btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.save{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--muted)}
+.save.ok{color:var(--go)}
+.stack{display:flex;flex-direction:column;gap:10px}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--muted)}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;
+  vertical-align:0}
+.dot.g{background:var(--go)}.dot.y{background:var(--hold)}.dot.r{background:var(--stop)}
+footer{color:var(--muted);font-size:12.5px;padding:30px 0 10px;border-top:1px solid var(--line);
+  margin-top:32px;line-height:1.6}
+@media (max-width:620px){
+  .mast{padding:18px 0 14px}
+  .mast h1{font-size:26px}
+  .stamp{gap:16px}
+  .stamp .v{font-size:16px}
+  .tiers{grid-template-columns:1fr}
+  .pb,.panel>.ph{padding-left:14px;padding-right:14px}
+}
+</style>
+
+<header>
+  <div class="wrap mast">
+    <div>
+      <h1>Rebuild Season</h1>
+      <div class="sub" id="subline">Postpartum training &amp; nutrition · Sep 2026 → Jan 2027</div>
+    </div>
+    <div class="stamp">
+      <div><div class="k">Postpartum</div><div class="v mono" id="ppwk">wk 4</div></div>
+      <div><div class="k">Phase</div><div class="v mono" id="phname">0</div></div>
+      <div><div class="k">6-wk visit</div><div class="v mono" id="dday">20d</div></div>
+    </div>
+  </div>
+</header>
+
+<nav><div class="wrap"><div class="tabs" role="tablist">
+  <button role="tab" aria-selected="true" data-p="today">Today</button>
+  <button role="tab" aria-selected="false" data-p="intake">Intake</button>
+  <button role="tab" aria-selected="false" data-p="plan">Plan</button>
+  <button role="tab" aria-selected="false" data-p="fuel">Fuel</button>
+  <button role="tab" aria-selected="false" data-p="watch">Watch for</button>
+</div></div></nav>
+
+<main class="wrap">
+  <section role="tabpanel" id="p-today"></section>
+  <section role="tabpanel" id="p-intake" hidden></section>
+  <section role="tabpanel" id="p-plan" hidden></section>
+  <section role="tabpanel" id="p-fuel" hidden></section>
+  <section role="tabpanel" id="p-watch" hidden></section>
+  <footer class="wrap" style="padding-left:0;padding-right:0">
+    A structured training plan, not medical advice. Your OB, midwife, or pelvic floor PT
+    overrules anything here. Built on the Goom/Donnelly/Brockwell return-to-running
+    guidelines and standard pelvic-health progressions.
+    <br><span id="storenote">Answers save as you type.</span>
+  </footer>
+</main>
+
+<script>
+/* ============ dates ============ */
+const BIRTH = new Date(2026,7,17), SIXWK = new Date(2026,8,28);
+const DAY = 864e5;
+const iso = d => d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+const parse = s => { const [y,m,d]=s.split("-").map(Number); return new Date(y,m-1,d); };
+const today = (()=>{ const n=new Date(); return new Date(n.getFullYear(),n.getMonth(),n.getDate()); })();
+const ppDay  = d => Math.floor((d-BIRTH)/DAY);
+const ppWeek = d => Math.floor(ppDay(d)/7)+1;
+const fmt = d => d.toLocaleDateString("en-US",{weekday:"short",month:"short",day:"numeric"});
+let cursor = new Date(today);
+
+/* ============ the phases ============ */
+const PHASES = [
+ {n:"0",name:"Reconnect",   from:"2026-09-07",to:"2026-09-27",wk:"PP wk 4–6",
+  goal:"Restore the pressure system — breath, pelvic floor, deep core, posture. Not fitness.",
+  cardio:"Walk 10 → 30 min",strength:"Bodyweight seeds, RPE 3–4"},
+ {n:"1",name:"Rebuild the Base",from:"2026-09-28",to:"2026-10-25",wk:"PP wk 7–10",
+  goal:"Establish the weekly shape you keep for years, at loads that are deliberately too easy.",
+  cardio:"Bike Zone 2, 20 → 30 min",strength:"3×/wk · RPE 5–6 · 8–12 reps"},
+ {n:"2",name:"Load + Impact Prep",from:"2026-10-26",to:"2026-11-22",wk:"PP wk 11–14",
+  goal:"Real progressive overload, plus a deliberate on-ramp to impact. Run-readiness test in week 13.",
+  cardio:"Bike intervals",strength:"3×/wk · RPE 7 · 6–8 reps"},
+ {n:"3",name:"Build",       from:"2026-11-23",to:"2026-12-20",wk:"PP wk 15–18",
+  goal:"Strength gets genuinely heavy. Running returns on a walk/run ladder, if the test passed.",
+  cardio:"Walk/run 2×/wk",strength:"3×/wk · RPE 7–8 · 5–6 reps"},
+ {n:"4",name:"Consolidate", from:"2026-12-21",to:"2027-01-03",wk:"PP wk 19–20",
+  goal:"Not progress. Arriving on Jan 4 having not stopped.",
+  cardio:"2×/wk",strength:"2×/wk, maintenance"}
+];
+const phaseOf = d => PHASES.find(p => d>=parse(p.from) && d<=parse(p.to)) || null;
+
+/* ============ the daily reset ============ */
+const RESET = [
+ {k:"reset1",b:"360° breathing",d:"Ribs widen sideways and back on the inhale; pelvic floor releases down. Don't suck the belly in.",n:"10 breaths"},
+ {k:"reset2",b:"Connection breath",d:"Exhale: gently lift the pelvic floor, low belly draws in behind it. Effort 3/10. Fully release on the inhale.",n:"10 reps"},
+ {k:"reset3",b:"Pelvic floor sets",d:"Quick flicks, then long holds — full release between every rep. Once a day, not more.",n:"10 + 5"},
+ {k:"reset4",b:"Mobility circuit",d:"Cat-cow ×8 · chest opener over a block 60s · thread-the-needle ×5/side · glute bridge ×10 · heel slides ×8/side · neck + wrist stretch.",n:"1 round"}
+];
+const SEEDS = [
+ {k:"s1",b:"Sit-to-stand",n:"2 × 8"},{k:"s2",b:"Wall push-up",n:"2 × 10"},
+ {k:"s3",b:"Band pull-apart",n:"2 × 12"},{k:"s4",b:"Standing hip abduction",n:"2 × 10/side"},
+ {k:"s5",b:"Bird dog",n:"2 × 6/side"},{k:"s6",b:"Calf raise",n:"2 × 12"}
+];
+const LIFTS = {
+ A:{t:"Strength A — Squat + Push",x:[
+  ["Goblet squat to a box","3 × 8–10","10 lb"],["Incline push-up","3 × 8","body"],
+  ["Band row, anchored","3 × 12","light band"],["Glute bridge","3 × 12","body"],
+  ["Banded clamshell","2 × 15/side","light band"],["Dead bug, heel taps","2 × 8/side","body"],
+  ["Farmer carry","3 × 30 sec","15 lb/hand"]]},
+ B:{t:"Strength B — Hinge + Pull",x:[
+  ["DB Romanian deadlift","3 × 10","12.5 lb/hand"],["Single-arm DB row","3 × 10/side","15 lb"],
+  ["Split squat, both feet down","3 × 8/side","body"],["Band pull-apart","3 × 15","light band"],
+  ["Side plank from knees","3 × 15 sec/side","body"],["Bird dog","2 × 8/side","body"],
+  ["Calf raise","2 × 15","body"]]},
+ C:{t:"Strength C — Full body + carries",x:[
+  ["Step-up, low box","3 × 8/side","body"],["DB floor press","3 × 10","12.5 lb/hand"],
+  ["Sumo DB deadlift","3 × 10","20 lb"],["Band face pull","3 × 15","light band"],
+  ["Suitcase carry","3 × 30 sec/side","15 lb"],["Single-leg balance","2 × 20 sec/side","body"],
+  ["Wall sit","2 × 20 sec","body"]]}
+};
+
+/* Phase 0: explicit days. w = walk minutes. */
+const P0 = {
+ "2026-09-08":{w:10,first:1},"2026-09-09":{w:12},"2026-09-10":{w:12,y:"10 min restorative yoga"},
+ "2026-09-11":{w:15},"2026-09-12":{w:15},"2026-09-13":{w:0,y:"10 min meditation",rest:1},
+ "2026-09-14":{w:15,st:1},"2026-09-15":{w:18},"2026-09-16":{w:0,y:"15 min postnatal or slow flow"},
+ "2026-09-17":{w:18,st:1},"2026-09-18":{w:20},"2026-09-19":{w:20,y:"10 min stretch"},
+ "2026-09-20":{w:0,y:"10 min meditation",rest:1},
+ "2026-09-21":{w:20,st:1},"2026-09-22":{w:25,bike:1},"2026-09-23":{w:0,y:"20 min yoga"},
+ "2026-09-24":{w:25,st:1},"2026-09-25":{w:0,bike:1,alt:"or 25 min walk"},
+ "2026-09-26":{w:30,note:"30 minutes continuous — the Phase 0 graduation test. Also: happy 40th."},
+ "2026-09-27":{w:0,y:"10 min meditation",rest:1,note:"Fill in the Phase 0 exit checklist before Phase 1 starts tomorrow."}
+};
+const WEEKDAY = { /* phase 1–3 template by day index (0=Sun) */
+ 1:{k:"A"},2:{k:"cardio",t:"Bike Zone 2 + walk",d:"Conversational the whole way. 20 min, building 2–3 min a week."},
+ 3:{k:"B"},4:{k:"yoga",t:"Peloton yoga / mobility + walk",d:"20–30 min. Slow flow or postnatal."},
+ 5:{k:"C"},6:{k:"long",t:"Long walk, 40–60 min",d:"Or 20 min elliptical if the weather is bad."},
+ 0:{k:"rest",t:"Rest + The Reset",d:"The Reset is still the whole job on a rest day."}
+};
+
+function sessionFor(d){
+  const key = iso(d), ph = phaseOf(d);
+  if(!ph) return {ph:null,title:"Outside the plan window",blocks:[]};
+  if(ph.n==="0"){
+    const p = P0[key];
+    if(!p) return {ph,title:"Before the plan starts",blocks:[]};
+    const b=[{h:"The Reset — daily, ~12 min",items:RESET}];
+    if(p.st) b.push({h:"Strength seeds — RPE 3–4, should feel almost pointless",items:SEEDS});
+    const c=[];
+    if(p.w) c.push({k:"walk",b:"Walk",d:p.rest?"":"Flat. Conversational. Stop before you want to.",n:p.w+" min"});
+    if(p.bike) c.push({k:"bike",b:"Peloton bike — only if the Week 6 gates are met",d:"Lochia stopped, no perineal soreness sitting 10 min on a hard chair, no heaviness after your longest walk.",n:"10–15 min easy"});
+    if(p.y) c.push({k:"yoga",b:"Peloton app",d:"Skip anything with plank, chaturanga, boat, or deep twists.",n:p.y});
+    if(c.length) b.push({h:p.rest?"Rest day":"Movement",items:c});
+    let title = p.rest ? "Rest + The Reset"
+      : (p.w>=30 ? "The 30-minute walk" : (p.st ? "Reset + seeds + walk" : (p.w? "Reset + "+p.w+" min walk" : "Reset + Peloton")));
+    return {ph,title,note:p.note,blocks:b};
+  }
+  const t = WEEKDAY[d.getDay()];
+  if(t.k==="A"||t.k==="B"||t.k==="C"){
+    const L=LIFTS[t.k];
+    return {ph,title:L.t,blocks:[
+      {h:"Every set: exhale on the effort, pelvic floor lifts with it",
+       items:L.x.map((r,i)=>({k:t.k+i,b:r[0],d:"Start around "+r[2]+". Add reps to the top of the range before you add load.",n:r[1]}))},
+      {h:"Finish",items:[{k:"reset_s",b:"The Reset",d:"Shortened is fine — breath and pelvic floor at minimum.",n:"5 min"}]}]};
+  }
+  return {ph,title:t.t,blocks:[
+    {h:"Session",items:[{k:t.k,b:t.t,d:t.d,n:""}]},
+    {h:"Daily",items:RESET}]};
+}
+
+/* ============ storage ============ */
+let db=null, LOG={}, SURVEY_A={};
+const LS = {
+  get(k){ try{ return JSON.parse(localStorage.getItem(k)||"null"); }catch(e){ return null; } },
+  set(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){} }
+};
+const timers={};
+function flag(msg,ok){ const el=document.getElementById("storenote"); if(!el)return;
+  el.textContent=msg; el.className=ok?"save ok":"save"; }
+function saveDoc(path, obj){
+  LS.set(path,obj);
+  clearTimeout(timers[path]);
+  timers[path]=setTimeout(async ()=>{
+    if(!db){ flag("Saved on this device.",true); return; }
+    try{ await db.doc(path).set(Object.assign({},obj,{updatedAt:new Date().toISOString()}));
+         flag("Saved "+new Date().toLocaleTimeString("en-US",{hour:"numeric",minute:"2-digit"}),true);
+    }catch(e){ flag("Saved on this device only — "+(e&&e.code||"offline"),false); }
+  },700);
+}
+function logFor(k){ return LOG[k] || (LOG[k]={done:{},sym:{}}); }
+function saveLog(k){ saveDoc("log/"+k, LOG[k]); }
+
+/* ============ today ============ */
+function renderToday(){
+  const el=document.getElementById("p-today"), d=cursor, key=iso(d), s=sessionFor(d), L=logFor(key);
+  const isToday = key===iso(today);
+  const wkStart=new Date(d); wkStart.setDate(d.getDate()-((d.getDay()+6)%7));
+  let strip="";
+  for(let i=0;i<7;i++){ const x=new Date(wkStart); x.setDate(wkStart.getDate()+i);
+    const xk=iso(x), lg=LOG[xk], filled=lg&&Object.values(lg.done||{}).some(Boolean);
+    strip+='<a role="button" tabindex="0" data-go="'+xk+'" class="'+(xk===key?"today":"")+' '+(filled&&xk!==key?"filled":"")+'">'
+      +'<div class="d">'+["M","T","W","T","F","S","S"][i]+'</div><div class="n">'+x.getDate()+'</div></a>';
+  }
+  const total = s.blocks.reduce((a,b)=>a+b.items.length,0);
+  const doneN = s.blocks.reduce((a,b)=>a+b.items.filter(i=>L.done[i.k]).length,0);
+
+  let blocks = s.blocks.map(b=>
+    '<div class="panel"><div class="ph"><h3>'+b.h+'</h3></div><div class="pb tight"><ul class="check">'
+    + b.items.map(i=>'<li class="'+(L.done[i.k]?"done":"")+'">'
+        +'<input type="checkbox" data-done="'+i.k+'" '+(L.done[i.k]?"checked":"")+' aria-label="'+i.b+'">'
+        +'<div class="txt"><b>'+i.b+'</b>'+(i.d?'<span>'+i.d+'</span>':'')+'</div>'
+        +(i.n?'<span class="dose">'+i.n+'</span>':'')+'</li>').join("")
+    + '</ul></div></div>').join("");
+
+  el.innerHTML =
+   '<div class="rowbtns" style="justify-content:space-between">'
+   +'<button class="btn" data-nav="-1">← Prev</button>'
+   +'<span class="eyebrow">'+fmt(d)+' · postpartum day '+ppDay(d)+'</span>'
+   +'<button class="btn" data-nav="1">Next →</button></div>'
+   +'<div class="strip">'+strip+'</div>'
+   +(s.ph?'<div><span class="eyebrow">Phase '+s.ph.n+' — '+s.ph.name+'</span>'
+      +'<h2 class="head" style="margin-top:4px">'+s.title+'</h2>'
+      +'<p class="lede">'+s.ph.goal+'</p></div>'
+      :'<h2 class="head">'+s.title+'</h2>')
+   +(s.note?'<div class="note">'+s.note+'</div>':'')
+   +(isToday?'':'<div class="note">You\'re looking at '+fmt(d)+'. <a href="#" data-go="'+iso(today)+'">Back to today</a>.</div>')
+   +'<div class="panel"><div class="ph"><h3>Which kind of day is it?</h3>'
+     +'<span class="cnt mono">'+doneN+'/'+total+' done</span></div><div class="pb stack">'
+     +'<div class="bar"><i style="width:'+(total?Math.round(doneN/total*100):0)+'%"></i></div>'
+     +'<div class="tiers">'
+     +'<button class="tier g" data-tier="g" aria-pressed="'+(L.tier==="g")+'"><b>Green</b><span>Slept 6+ hrs, broken is fine. Do the session as written.</span></button>'
+     +'<button class="tier y" data-tier="y" aria-pressed="'+(L.tier==="y")+'"><b>Yellow</b><span>Slept 4–6 hrs. Half the sets, same loads. Cut volume, never load.</span></button>'
+     +'<button class="tier r" data-tier="r" aria-pressed="'+(L.tier==="r")+'"><b>Red</b><span>Under 4 hrs, sick, or underwater. The Reset + a 10 min walk. It counts.</span></button>'
+     +'</div></div></div>'
+   + blocks
+   +'<div class="panel"><div class="ph"><h3>Log</h3><span class="cnt mono">'+key+'</span></div><div class="pb">'
+     +'<div class="fieldrow"><label for="f_sleep">Sleep, total in 24h <span class="hint">Naps count.</span></label>'
+       +'<div class="numwrap"><input type="number" id="f_sleep" step="0.5" min="0" max="14" value="'+(L.sleep??"")+'" data-log="sleep"> hrs</div></div>'
+     +'<div class="fieldrow"><label for="f_energy">Energy, 1–10</label>'
+       +'<div class="numwrap"><input type="number" id="f_energy" min="1" max="10" value="'+(L.energy??"")+'" data-log="energy"></div></div>'
+     +'<div class="fieldrow" style="flex-direction:column;align-items:stretch">'
+       +'<label style="margin-bottom:6px">Anything from the traffic light? <span class="hint">Tap what applies. Any of these means you regress a level — see <b>Watch for</b>.</span></label>'
+       +'<div class="chips">'
+       +["Leaking","Heaviness or dragging","Doming","Bleeding changed","Pelvic pain","Back / SI pain"]
+         .map(t=>'<button class="chip flag" data-sym="'+t+'" aria-pressed="'+(!!L.sym[t])+'">'+t+'</button>').join("")
+       +'</div></div>'
+     +'<div class="fieldrow" style="flex-direction:column;align-items:stretch">'
+       +'<label for="f_notes" style="margin-bottom:6px">Notes</label>'
+       +'<textarea id="f_notes" data-log="notes" placeholder="Loads used, how it felt, what got in the way.">'+(L.notes||"")+'</textarea></div>'
+     +'</div></div>';
+}
+
+/* ============ intake survey ============ */
+const Y3=["Yes","No","Not sure"], FREQ=["Not at all","Sometimes","Often","Most of the time"];
+const SURVEY=[
+ {L:"A",n:"Baseline",q:[
+  {i:"a_name",t:"text",q:"Preferred name"},
+  {i:"a_dob",t:"one",q:"Date of birth — Sep 26, 1986?",o:["Correct","Different — I'll note it below"]},
+  {i:"a_ht",t:"text",q:"Height"},
+  {i:"a_wt",t:"text",q:"Current weight",h:"Sets your protein target and calorie floor. Skip it if you'd rather — say so below."},
+  {i:"a_prewt",t:"text",q:"Pre-pregnancy weight"},
+  {i:"a_track",t:"one",q:"Do you want weight tracked at all?",o:["Weekly","Monthly","No — use other metrics"]},
+  {i:"a_alt",t:"long",q:"If not weight, what should we measure instead?",h:"Energy, strength numbers, how clothes fit, run pace, photos, nothing."}]},
+ {L:"B",n:"Birth & recovery",f:1,q:[
+  {i:"b_push",t:"one",q:"Length of the pushing stage",o:["Under 30 min","30–60 min","1–2 hrs","2+ hrs","Don't know"]},
+  {i:"b_assist",t:"one",q:"Assisted delivery?",o:["No","Forceps","Vacuum"]},
+  {i:"b_tear",t:"one",q:"Tearing",f:1,o:["None","1st degree","2nd degree","3rd degree","4th degree","Episiotomy","Don't know"]},
+  {i:"b_stitch",t:"one",q:"Stitches — how are they now?",o:["No stitches","Healed","Still sore","Still painful"]},
+  {i:"b_blood",t:"one",q:"Blood loss at delivery",f:1,o:["Normal","Heavier than expected","Postpartum hemorrhage, treated"]},
+  {i:"b_lochia",t:"one",q:"Bleeding (lochia) right now",f:1,o:["Stopped completely","Light spotting only","Light flow, panty liner","Still needs a pad","Slowed, then got heavier again"]},
+  {i:"b_pain",t:"many",q:"Where does it hurt today?",o:["Perineum","Low back","Pubic bone / front of pelvis","Tailbone","Upper back / neck","Wrists or thumbs","Hips","Headaches","Nowhere"],
+   h:"Pubic bone pain changes the plan immediately — it means narrow-stance work only. Wrist and thumb pain at 3 weeks is very common."},
+  {i:"b_visit",t:"text",q:"6-week visit — date booked?",h:"The 6-week mark is Mon Sep 28."},
+  {i:"b_bp",t:"one",q:"Has your blood pressure been checked since discharge?",f:1,o:["Yes, normal","Yes, high","No"],
+   h:"Postpartum preeclampsia can appear up to 6 weeks after birth. New headaches, vision changes, or swelling get checked, not waited out."},
+  {i:"b_comp",t:"long",q:"Any complications I should know about?",h:"Infection, retained placenta, transfusion, BP issues, anemia."}]},
+ {L:"C",n:"Pelvic floor & core",f:1,q:[
+  {i:"c_leak",t:"one",q:"Any urine leaking — even a few drops?",f:1,o:["Never","With cough / sneeze / laugh","Lifting the baby or car seat","With sudden urgency","Can't fully control it"]},
+  {i:"c_leakfreq",t:"one",q:"If yes, how often?",o:["N/A","Rare","Weekly","Daily","Many times a day"]},
+  {i:"c_heavy",t:"one",q:"Heaviness, dragging, or a bulging sensation in the vagina?",f:1,o:["Never","End of the day or after being on my feet","After walking or carrying","Constantly"],
+   h:"Any yes here and we cap standing and walking volume now, and you get a PT referral now rather than at 6 weeks. It is common and usually very manageable — it is just not something to train through."},
+  {i:"c_bowel",t:"many",q:"Bowel",o:["All normal","Constipation","Straining","Leaking gas or stool","Hemorrhoids"]},
+  {i:"c_contract",t:"one",q:"Can you feel a pelvic floor contraction? Exhale, lift gently, then fully release.",f:1,
+   o:["Yes — clear lift and clear release","I feel something but it's vague","I feel nothing","I can lift but can't tell if I release","It's painful to try"]},
+  {i:"c_dr",t:"text",q:"Diastasis check — gap at the navel, in finger widths",
+   h:"On your back, knees bent. Fingers flat, pointing at your feet, just above the navel. Lift only your head an inch. Feel the gap and how deep your fingers sink. A gap at 3 weeks is normal and expected."},
+  {i:"c_drdepth",t:"one",q:"How deep do your fingers sink?",o:["Shallow — firm resistance","Medium","Deep and soft","Can't tell"],
+   h:"Depth and how much tension you can generate matter more than width."},
+  {i:"c_dome",t:"one",q:"Does your belly cone or tent into a ridge — lifting your head, getting out of bed, or lifting the car seat?",f:1,o:Y3},
+  {i:"c_pain",t:"one",q:"Pain with intercourse, tampons, or exams?",o:["Not applicable yet","No","Yes"]},
+  {i:"c_prior",t:"long",q:"Any pelvic floor issues before or during pregnancy?",h:"Leaking while running, prolapse, painful periods, endometriosis, IBS."},
+  {i:"c_first",t:"one",q:"Is this your first baby?",o:["Yes","No"]}]},
+ {L:"D",n:"Feeding & nutrition",f:1,q:[
+  {i:"d_feed",t:"one",q:"How is the baby fed?",f:1,o:["Exclusively breastfeeding","Breastfeeding + pumping","Exclusively pumping","Combo — breast + formula","Exclusively formula"],
+   h:"This sets your calorie floor. Exclusive breastfeeding costs roughly 450–500 kcal/day, and means we do not run a real deficit yet."},
+  {i:"d_supply",t:"one",q:"Any supply concerns?",o:["No","Low supply","Oversupply","Working with an IBCLC"]},
+  {i:"d_day",t:"long",q:"A typical day of eating right now",h:"Be honest. 'Half a bagel standing up' is a legitimate and useful answer."},
+  {i:"d_prot",t:"one",q:"Roughly how much protein are you getting?",o:["No idea","Not much","Some at dinner only","Decent at 2 meals","30g+ at 3–4 points a day"]},
+  {i:"d_water",t:"text",q:"Water per day",h:"Ounces, or number of bottles and what size."},
+  {i:"d_caf",t:"text",q:"Caffeine — how much, and when?"},
+  {i:"d_supp",t:"many",q:"Supplements you take now",o:["Prenatal","Vitamin D","Iron","Omega-3 / DHA","Magnesium","Protein powder","Collagen","None"]},
+  {i:"d_diet",t:"many",q:"Dietary pattern or restrictions",o:["None","Vegetarian","Vegan","Gluten-free","Dairy-free","Baby-driven elimination","Other"]},
+  {i:"d_like",t:"long",q:"Foods you genuinely like and would eat over and over"},
+  {i:"d_no",t:"long",q:"Foods that are off the table no matter how healthy they are"},
+  {i:"d_cook",t:"one",q:"Realistic cooking capacity this month",o:["None — assembly and delivery only","One batch-cook session a week","Can cook most dinners","Someone else is cooking"]},
+  {i:"d_hist",t:"one",q:"History with dieting or restriction?",f:1,o:["No history","Some history — prefer no calorie talk","Prefer explicit numbers"],
+   h:"This decides whether the nutrition section uses numbers at all."}]},
+ {L:"E",n:"Sleep, energy, mood",f:1,q:[
+  {i:"e_sleep",t:"text",q:"Total sleep in 24 hours, including naps"},
+  {i:"e_stretch",t:"text",q:"Longest unbroken stretch"},
+  {i:"e_night",t:"text",q:"Who does night feeds?"},
+  {i:"e_nap",t:"one",q:"Do you nap?",o:["Yes","No","Can't fall asleep even when I could"]},
+  {i:"e_energy",t:"one",q:"Energy right now, 1–10",o:["1–2","3–4","5–6","7–8","9–10"]},
+  {i:"e_best",t:"one",q:"Best time of day for you",o:["Early AM","Mid-morning","Afternoon","Evening"]},
+  {i:"e_m1",t:"one",q:"Past 7 days: I've been able to laugh and see the funny side",o:FREQ},
+  {i:"e_m2",t:"one",q:"I've looked forward with enjoyment to things",o:FREQ},
+  {i:"e_m3",t:"one",q:"I've blamed myself unnecessarily when things went wrong",o:FREQ},
+  {i:"e_m4",t:"one",q:"I've been anxious or worried for no good reason",o:FREQ},
+  {i:"e_m5",t:"one",q:"I've felt scared or panicky",o:FREQ},
+  {i:"e_m6",t:"one",q:"Things have been getting on top of me",o:FREQ},
+  {i:"e_m7",t:"one",q:"I've been so unhappy I've had difficulty sleeping",o:FREQ},
+  {i:"e_m8",t:"one",q:"I've felt sad or miserable",o:FREQ},
+  {i:"e_m9",t:"one",q:"I've been so unhappy I've been crying",o:FREQ},
+  {i:"e_m10",t:"one",q:"The thought of harming myself has occurred to me",f:1,o:FREQ,
+   h:"If this is anything but 'not at all' — please call or text Postpartum Support International at 1-800-944-4773, or 988. Today, not after the workout. Nothing in this plan matters more."},
+  {i:"e_intrusive",t:"one",q:"Intrusive or scary thoughts about the baby?",o:["No","Yes"],
+   h:"Extremely common, and usually anxiety rather than danger. Still worth naming to a provider."},
+  {i:"e_hist",t:"long",q:"History of depression, anxiety, or PMDD before pregnancy? In therapy or on medication now?"},
+  {i:"e_support",t:"long",q:"Who can hold the baby for 30 minutes?"}]},
+ {L:"F",n:"Fitness history",q:[
+  {i:"f_mara",t:"text",q:"You said marathons in 2013 and 2027 — which year was the second?",h:"Assuming a typo. Times too, if you have them."},
+  {i:"f_peak",t:"long",q:"Your best-ever fitness point, and roughly when"},
+  {i:"f_before",t:"long",q:"Typical training in the year before pregnancy"},
+  {i:"f_during",t:"long",q:"What did you do during pregnancy, and until how many weeks?"},
+  {i:"f_str",t:"one",q:"Strength training background",o:["None","Classes / bootcamp","Machines","Free weights, some experience","Barbell / structured programs"]},
+  {i:"f_hinge",t:"one",q:"Do you know how to hip hinge?",o:Y3},
+  {i:"f_inj",t:"many",q:"Injuries — ever",o:["None","Plantar fasciitis","IT band","Runner's knee","Shin splints","Stress fracture","Achilles","Hip / glute","Low back","Ankle sprains","Other"]},
+  {i:"f_injnow",t:"long",q:"Which of those still bother you, and how?"},
+  {i:"f_enjoy",t:"long",q:"What movement have you most genuinely enjoyed?"},
+  {i:"f_hate",t:"long",q:"What do you actively dislike and will quit?"}]},
+ {L:"G",n:"Goals",q:[
+  {i:"g_mean",t:"long",q:"In one sentence — what does 'full body fitness' mean to you?"},
+  {i:"g_top",t:"many",q:"Pick your top three",o:["Strength — stronger than pre-pregnancy","Return to running comfortably","Energy through the day","Body composition","Core and pelvic floor that work","Mobility, no aches from carrying","Mental health / time that's mine","A specific event or race"]},
+  {i:"g_dec",t:"long",q:"By Dec 31, 2026 I want to be able to…"},
+  {i:"g_2027",t:"long",q:"By mid-2027 I want to be able to…"},
+  {i:"g_race",t:"text",q:"Any race or event on the radar?",h:"Bay Area options in range: Berkeley Half in Nov, Oakland Running Festival in March, SF Half in July."},
+  {i:"g_heavy",t:"one",q:"How do you feel about lifting genuinely heavy — a 50 lb dumbbell in each hand by spring?",o:["Excited","Willing","Nervous but open","Not interested"]},
+  {i:"g_40",t:"long",q:"Turning 40 this month — motivating, neutral, or loaded?"}]},
+ {L:"H",n:"Schedule & logistics",q:[
+  {i:"h_when",t:"long",q:"Realistic training windows, by day",h:"Not aspirational. What could actually happen — e.g. 'Mon/Wed/Fri 6:30am before he wakes, Sat afternoon when my mom visits.'"},
+  {i:"h_freq",t:"one",q:"Sessions a week you'd actually commit to",o:["2","3","4","5","6"]},
+  {i:"h_len",t:"one",q:"Best realistic session length",o:["10 min","15–20 min","30 min","45 min","60 min"]},
+  {i:"h_split",t:"one",q:"One 40-minute session or two 20-minute ones?",o:["One longer","Two shorter","Depends on the day"]},
+  {i:"h_work",t:"text",q:"Back at work when? Remote or in-office?"},
+  {i:"h_stroll",t:"text",q:"Stroller — brand and model?",h:"Jogging with the baby in one is a 6–8 month thing for their neck, separate from your own readiness."},
+  {i:"h_carrier",t:"one",q:"Baby carrier?",o:["Yes","No"],h:"Carrier walking loads the pelvic floor differently than a stroller."},
+  {i:"h_room",t:"one",q:"Can you train with the baby in the room?",o:["Yes","Only sometimes","No"]},
+  {i:"h_care",t:"long",q:"Childcare situation"},
+  {i:"h_gym",t:"long",q:"The Metro510 fitness room — hours, how busy, what weights exactly, how far from your unit?",
+   h:"Dumbbell range, a bench, a cable machine, a rack? This decides how much of the plan can happen downstairs."},
+  {i:"h_shoes",t:"one",q:"Peloton shoes / cleats?",o:["Have them","Need them"]},
+  {i:"h_inst",t:"text",q:"Peloton instructors you like — or can't stand"},
+  {i:"h_style",t:"one",q:"Following a class on video, or a written plan you run yourself?",o:["Video class","Written plan","Mix"]},
+  {i:"h_bike",t:"text",q:"Where's the bike relative to where the baby sleeps?"}]},
+ {L:"I",n:"Adherence",q:[
+  {i:"i_worked",t:"long",q:"Last time you had a consistent routine — what made it work?"},
+  {i:"i_killed",t:"long",q:"What killed it?"},
+  {i:"i_acc",t:"many",q:"Accountability that actually works for you",o:["Checking boxes","Data and graphs","A person expecting me","Streaks","Classes on a schedule","Nothing — I just do it"]},
+  {i:"i_derail",t:"long",q:"What's most likely to derail this in the next three months?"},
+  {i:"i_min",t:"long",q:"On a day where everything falls apart, what's the smallest thing you'd still do?"},
+  {i:"i_coach",t:"one",q:"How do you want to be coached?",o:["Gentle","Direct","Push me","Data, no pep talk"]},
+  {i:"i_partner",t:"one",q:"Does your partner know about this and are they on board with protecting 30 minutes?",o:Y3}]},
+ {L:"J",n:"Medical",f:1,q:[
+  {i:"j_cond",t:"many",q:"Conditions",f:1,o:["None","Hypertension","Gestational diabetes","Preeclampsia","Thyroid","PCOS","Asthma","Autoimmune","Migraines","Heart condition","Clotting disorder","Other"]},
+  {i:"j_meds",t:"long",q:"Current medications"},
+  {i:"j_labs",t:"long",q:"Recent labs?",h:"Ferritin, hemoglobin, TSH, vitamin D. Worth asking for all four at your 6-week visit — postpartum thyroiditis and low ferritin both masquerade as 'just tired from the baby.'"},
+  {i:"j_pt",t:"one",q:"Ever seen a pelvic floor PT?",o:["No","Yes","Have a referral","Want help finding one in the East Bay"]},
+  {i:"j_else",t:"long",q:"Anything else I should know that no question here asked about?"}]}
+];
+function renderIntake(){
+  const el=document.getElementById("p-intake");
+  const total=SURVEY.reduce((a,s)=>a+s.q.length,0);
+  const answered=SURVEY.reduce((a,s)=>a+s.q.filter(q=>{const v=SURVEY_A[q.i];
+    return Array.isArray(v)?v.length:(v!==undefined&&v!=="")}).length,0);
+  el.innerHTML=
+   '<div><span class="eyebrow">Intake</span><h2 class="head" style="margin-top:4px">Everything I need to build the real plan</h2>'
+   +'<p class="lede">Long on purpose — every question changes something. Answers save as you type, '
+   +'and nothing is required. Sections marked in red change the plan immediately.</p></div>'
+   +'<div class="panel"><div class="pb stack">'
+     +'<div style="display:flex;justify-content:space-between;align-items:baseline">'
+       +'<span class="eyebrow">Progress</span>'
+       +'<span class="mono" style="font-size:13px;color:var(--accent-ink)">'+answered+' / '+total+'</span></div>'
+     +'<div class="bar"><i style="width:'+Math.round(answered/total*100)+'%"></i></div></div></div>'
+   + SURVEY.map((s,si)=>{
+      const done=s.q.filter(q=>{const v=SURVEY_A[q.i];return Array.isArray(v)?v.length:(v!==undefined&&v!=="")}).length;
+      return '<div class="sect" data-sect="'+si+'">'
+       +'<button class="sh" aria-expanded="false"><span class="letter">'+s.L+'</span>'
+       +'<span class="sname">'+s.n+'</span><span class="cnt">'+done+'/'+s.q.length+'</span>'
+       +'<span class="caret">▶</span></button><div class="sbody">'
+       + s.q.map(q=>{
+          const v=SURVEY_A[q.i];
+          let body="";
+          if(q.t==="text") body='<input type="text" data-sv="'+q.i+'" value="'+String(v??"").replace(/"/g,"&quot;")+'">';
+          else if(q.t==="long") body='<textarea data-sv="'+q.i+'">'+(v??"")+'</textarea>';
+          else if(q.t==="one") body='<div class="chips">'+q.o.map(o=>
+              '<button class="chip'+(q.f?" flag":"")+'" data-svone="'+q.i+'" data-val="'+o.replace(/"/g,"&quot;")+'" aria-pressed="'+(v===o)+'">'+o+'</button>').join("")+'</div>';
+          else body='<div class="chips">'+q.o.map(o=>
+              '<button class="chip'+(q.f?" flag":"")+'" data-svmany="'+q.i+'" data-val="'+o.replace(/"/g,"&quot;")+'" aria-pressed="'+(Array.isArray(v)&&v.includes(o))+'">'+o+'</button>').join("")+'</div>';
+          return '<div class="q'+(q.f?" flagged":"")+'"><span class="qt">'+q.q+'</span>'
+            +(q.h?'<span class="qh">'+q.h+'</span>':'')+body+'</div>';
+         }).join("")
+       +'</div></div>';
+     }).join("")
+   +'<div class="panel"><div class="ph"><h3>When you\'re done</h3></div><div class="pb stack">'
+     +'<p style="margin:0;font-size:14px;color:var(--ink-2)">Your answers are saved here. To pull them into the repo, '
+     +'copy the text below into <span class="mono" style="font-size:13px">intake/INTAKE-SURVEY.md</span>, or just tell me they\'re filled in and I\'ll read them and rebuild the plan.</p>'
+     +'<div class="rowbtns"><button class="btn" id="showtxt">Show my answers as text</button></div>'
+     +'<textarea id="answers" hidden style="min-height:220px" class="mono" readonly></textarea>'
+   +'</div></div>';
+}
+function answersText(){
+  let out="# Intake answers — "+new Date().toLocaleDateString()+"\n";
+  SURVEY.forEach(s=>{ out+="\n## "+s.L+". "+s.n+"\n";
+    s.q.forEach(q=>{ const v=SURVEY_A[q.i];
+      const a=Array.isArray(v)?v.join(", "):(v??"");
+      if(a!=="") out+="- **"+q.q+"** "+a+"\n"; }); });
+  return out;
+}
+
+/* ============ plan / fuel / watch ============ */
+function renderPlan(){
+  const el=document.getElementById("p-plan"), now=phaseOf(today);
+  el.innerHTML=
+   '<div><span class="eyebrow">Roadmap</span><h2 class="head" style="margin-top:4px">Sep 8, 2026 → Jan 3, 2027</h2>'
+   +'<p class="lede">Seventeen weeks, five phases. Each one earns the next — the exit checklist is the gate, not the calendar.</p></div>'
+   +'<div class="panel"><div class="scroll"><table><thead><tr>'
+     +'<th>Phase</th><th>Dates</th><th>PP weeks</th><th>Cardio</th><th>Strength</th></tr></thead><tbody>'
+     + PHASES.map(p=>'<tr class="'+(now&&now.n===p.n?"now":"")+'">'
+        +'<td><b>'+p.n+'</b> — '+p.name+'</td>'
+        +'<td class="n">'+parse(p.from).toLocaleDateString("en-US",{month:"short",day:"numeric"})
+          +' – '+parse(p.to).toLocaleDateString("en-US",{month:"short",day:"numeric"})+'</td>'
+        +'<td class="n">'+p.wk.replace("PP wk ","")+'</td><td>'+p.cardio+'</td><td>'+p.strength+'</td></tr>').join("")
+     +'</tbody></table></div></div>'
+   + PHASES.map(p=>'<div class="panel"><div class="ph"><h3>Phase '+p.n+' — '+p.name+'</h3>'
+       +'<span class="cnt mono">'+p.wk+'</span></div><div class="pb">'
+       +'<p style="margin:0;font-size:14.5px;color:var(--ink-2)">'+p.goal+'</p></div></div>').join("")
+   +'<div class="panel"><div class="ph"><h3>Fixed dates</h3></div><div class="scroll"><table><tbody>'
+     +[["Tue Sep 8","Start. The Reset + a 10 minute walk."],
+       ["Mon Sep 14","Strength seeds begin"],
+       ["Sat Sep 26","You turn 40"],
+       ["Mon Sep 28","6-week mark · clearance visit · Phase 1 starts"],
+       ["Mon Oct 19","Deload week"],
+       ["Mon Oct 26","Phase 2 · the impact ladder begins"],
+       ["Mon Nov 9","12-week mark · run-readiness test"],
+       ["Mon Nov 16","Deload week"],
+       ["Mon Nov 23","Phase 3 · walk/run begins if you passed"],
+       ["Mon Dec 14","Deload week"],
+       ["Mon Dec 21","Phase 4 · holiday minimum"],
+       ["Mon Jan 4","The forever template begins"]]
+       .map(r=>'<tr><td class="n" style="width:120px">'+r[0]+'</td><td>'+r[1]+'</td></tr>').join("")
+     +'</tbody></table></div></div>'
+   +'<div class="panel"><div class="ph"><h3>The engine — six rules that outlast the plan</h3></div><div class="pb"><ul class="check" style="pointer-events:none">'
+     +[["Double progression","Add reps to the top of the range on every set, twice. Then add load and drop back to the bottom. +2.5 lb on presses and rows, +5 lb on squats, hinges, and carries."],
+       ["RPE ceiling by phase","Phase 0 is RPE 3–4. Phase 1 is 5–6. Phase 2 is 7. Phase 3 is 7–8. Never RPE 10 — grinding reps postpartum buys nothing and costs a lot."],
+       ["Deload every fourth week","Same movements, about 60% of the load, one fewer set. Non-negotiable, forever. Deloads are when the adaptation actually lands."],
+       ["The symptom traffic light","Outranks every other rule here. Leaking, heaviness, doming, a bleeding change, or pelvic pain means you regress a level. Every time."],
+       ["The three-tier day","Decide green, yellow, or red before you start. A red day done beats a green day skipped."],
+       ["Never add two things at once","New load or new reps or new duration or a new movement. One variable a week, so you always know what caused what."]]
+       .map((r,i)=>'<li><span class="dose">'+(i+1)+'</span><div class="txt"><b>'+r[0]+'</b><span>'+r[1]+'</span></div></li>').join("")
+     +'</ul></div></div>'
+   +'<div class="panel"><div class="ph"><h3>The forever template</h3><span class="cnt mono">2027 →</span></div><div class="scroll"><table><tbody>'
+     +[["Mon","Strength A — squat + push"],["Tue","Cardio — run or bike"],["Wed","Strength B — hinge + pull"],
+       ["Thu","Mobility — Peloton yoga"],["Fri","Strength C — full body + carries"],
+       ["Sat","Long cardio — long run or long walk"],["Sun","Rest — The Reset"]]
+       .map(r=>'<tr><td class="n" style="width:70px">'+r[0]+'</td><td>'+r[1]+'</td></tr>').join("")
+     +'</tbody></table></div><div class="pb"><div class="note">Every week covers <b>squat · hinge · push · pull · carry · single-leg · core</b>. '
+     +'That is the whole checklist. Hit all seven patterns, deload every fourth week, and you are training well. The rest is detail.</div></div></div>';
+}
+function renderFuel(){
+  document.getElementById("p-fuel").innerHTML=
+   '<div><span class="eyebrow">Fuel</span><h2 class="head" style="margin-top:4px">Enough, before anything else</h2>'
+   +'<p class="lede">Rewritten around your answers once Section D comes back — feeding method changes everything. This is the version that holds regardless.</p></div>'
+   +'<div class="panel"><div class="ph"><h3>The one rule right now</h3></div><div class="pb">'
+     +'<p style="margin:0 0 10px;font-size:15px"><b>You are not in a fat-loss phase.</b> Not at 3 weeks, not at 8.</p>'
+     +'<p style="margin:0;font-size:14.5px;color:var(--ink-2)">Your body is healing a placental wound roughly the size of a dinner plate, '
+     +'rebuilding blood volume, possibly making 750–900 ml of milk a day, and running on broken sleep. Underfeeding on top of that '
+     +'gives you stalled healing, low supply, no energy, no training adaptation — and because your body protects milk production first, '
+     +'you lose muscle rather than fat. Body composition is a 2027 project, and it works far better then. Through 2026 the goal is one word: '
+     +'<b>enough</b>.</p></div></div>'
+   +'<div class="panel"><div class="ph"><h3>Calorie floor by feeding method</h3></div><div class="scroll"><table><thead><tr>'
+     +'<th>Feeding</th><th>Add to maintenance</th><th>Do not go below</th></tr></thead><tbody>'
+     +'<tr><td>Exclusively breastfeeding</td><td class="n">+450–500 kcal</td><td class="n">~2,000 kcal</td></tr>'
+     +'<tr><td>Combo feeding</td><td class="n">+250–350 kcal</td><td class="n">~1,900 kcal</td></tr>'
+     +'<tr><td>Not breastfeeding</td><td class="n">+0</td><td class="n">~1,700 kcal</td></tr>'
+     +'</tbody></table></div><div class="pb"><div class="note">If breastfeeding, cap weight change at about <b>1 lb a week</b>. '
+     +'Faster is the most common cause of a supply drop, and it is not fat coming off any faster.</div></div></div>'
+   +'<div class="panel"><div class="ph"><h3>Protein — the one number worth tracking</h3><span class="cnt mono">0.7–0.9 g/lb</span></div><div class="pb">'
+     +'<p style="margin:0 0 12px;font-size:14.5px;color:var(--ink-2)">For most women that lands at <b>110–150 g a day</b> — more than it sounds like, '
+     +'and almost certainly more than a day of one-handed eating delivers. Don\'t try to hit it at dinner. Anchor <b>30–40 g at four points</b>.</p>'
+     +'<div class="scroll"><table><thead><tr><th>Anchor</th><th>Easy versions</th></tr></thead><tbody>'
+     +[["Morning","Greek yogurt + protein powder · 3 eggs + cottage cheese · a shake"],
+       ["Midday","Rotisserie chicken · canned tuna or salmon · last night's protein · deli turkey"],
+       ["Afternoon","Shake · cottage cheese · edamame · jerky · a bar"],
+       ["Evening","Dinner, plus an extra serving of whatever the protein is"]]
+       .map(r=>'<tr><td class="n">'+r[0]+'</td><td>'+r[1]+'</td></tr>').join("")
+     +'</tbody></table></div></div></div>'
+   +'<div class="panel"><div class="ph"><h3>Water</h3></div><div class="pb">'
+     +'<p style="margin:0;font-size:14.5px;color:var(--ink-2)">Baseline 2.5–3 L. <b>Breastfeeding adds about a litre</b> → 3.5–4 L a day, '
+     +'plus 500–750 ml around training. Practical version: a 32 oz bottle at every feeding station, and you drink one '
+     +'<b>during</b> every feed — thirst hits hard mid-letdown, which makes it the easiest habit to attach it to.</p></div></div>'
+   +'<div class="panel"><div class="ph"><h3>What actually matters, and why</h3></div><div class="scroll"><table><thead><tr>'
+     +'<th>Nutrient</th><th>Why here</th><th>Where</th></tr></thead><tbody>'
+     +[["Iron","Blood loss plus pregnancy depletion. Low ferritin feels exactly like new-parent exhaustion and blunts every training adaptation.","Red meat, lentils, spinach + vitamin C"],
+       ["Vitamin D","Widely low, and bone density matters more at 40.","1,000–2,000 IU/day"],
+       ["Calcium","Lactation pulls from your bones.","1,000–1,300 mg/day"],
+       ["Choline","The requirement is higher while lactating than while pregnant, and most prenatals underdose it.","Egg yolks, liver, soy"],
+       ["Omega-3 / DHA","Infant brain development, and your mood.","Fatty fish 2×/wk, or 300 mg"]]
+       .map(r=>'<tr><td class="n">'+r[0]+'</td><td>'+r[1]+'</td><td>'+r[2]+'</td></tr>').join("")
+     +'</tbody></table></div><div class="pb"><div class="note"><b>Keep taking your prenatal</b> the whole time you\'re breastfeeding. '
+     +'It isn\'t optional during lactation.</div></div></div>'
+   +'<div class="panel"><div class="ph"><h3>Plate template — for when you don\'t want to think</h3></div><div class="pb tight"><ul class="check" style="pointer-events:none">'
+     +[["A palm-plus of protein","30–40 g. Build the plate around this, in this order.","1"],
+       ["Two fists of vegetables or fruit","Whatever's easy. Frozen counts.","2"],
+       ["A cupped hand of starch","Rice, potato, oats, bread. Carbs make milk and fuel training — they are not the enemy here.","3"],
+       ["A thumb of fat","Olive oil, avocado, nuts.","4"]]
+       .map(r=>'<li><span class="dose">'+r[2]+'</span><div class="txt"><b>'+r[0]+'</b><span>'+r[1]+'</span></div></li>').join("")
+     +'</ul></div></div>'
+   +'<div class="panel"><div class="ph"><h3>Supplements</h3></div><div class="pb stack">'
+     +'<div><span class="eyebrow">Worth it</span><p style="margin:4px 0 0;font-size:14.5px;color:var(--ink-2)">Prenatal (keep going), vitamin D, omega-3, magnesium glycinate at night for sleep and cramps, protein powder as a convenience.</p></div>'
+     +'<div><span class="eyebrow">Wait</span><p style="margin:4px 0 0;font-size:14.5px;color:var(--ink-2)">Creatine — genuinely good for you and well-supported for women around 40, but the lactation data is thin. Revisit when you wean, or ask your provider.</p></div>'
+     +'<div><span class="eyebrow">Skip</span><p style="margin:4px 0 0;font-size:14.5px;color:var(--ink-2)">Anything marketed as postpartum weight loss, detox teas, appetite suppressants, fat burners. All contraindicated while breastfeeding and most contraindicated generally.</p></div>'
+   +'</div></div>'
+   +'<div class="panel"><div class="ph"><h3>The actual bottleneck</h3></div><div class="pb">'
+     +'<p style="margin:0;font-size:14.5px;color:var(--ink-2)">It is never knowledge. It is that food has to already be edible, one-handed, at 2pm, '
+     +'when you haven\'t sat down. One 45-minute Sunday block — two pounds of a protein, a tray of vegetables, a pot of rice — is four or five '
+     +'assembled meals. Take every meal-train offer and ask for protein specifically. Keep a restocked snack station wherever you feed the baby. '
+     +'Frozen vegetables, pre-cooked rice, canned fish, and rotisserie chicken are not cheating; cooking from scratch is not a nutritional requirement.</p></div></div>';
+}
+function renderWatch(){
+  document.getElementById("p-watch").innerHTML=
+   '<div><span class="eyebrow">Safety</span><h2 class="head" style="margin-top:4px">What stops a session, and what stops the day</h2>'
+   +'<p class="lede">Read this once. It is short, and it outranks everything else in here.</p></div>'
+   +'<div class="panel" style="border-color:var(--stop)"><div class="ph" style="background:var(--stop-soft)">'
+     +'<h3 style="color:var(--stop)">Call your provider or go in now</h3></div><div class="pb tight"><ul class="check" style="pointer-events:none">'
+     +[["Bleeding that soaks a pad in an hour","Or clots bigger than a golf ball."],
+       ["Fever over 100.4°F, or foul-smelling discharge",""],
+       ["A severe headache that won't respond to medication","With vision changes, spots, or new swelling in the face or hands. Postpartum preeclampsia can occur up to 6 weeks after delivery and is an emergency. It does not care that the birth went well."],
+       ["Chest pain or shortness of breath",""],
+       ["Calf pain, swelling, redness, or warmth in one leg","Possible clot."],
+       ["Fainting, or a racing heart at rest",""],
+       ["Thoughts of harming yourself or the baby","Postpartum Support International: 1-800-944-4773, call or text. Or 988."]]
+       .map(r=>'<li><div class="txt"><b>'+r[0]+'</b>'+(r[1]?'<span>'+r[1]+'</span>':'')+'</div></li>').join("")
+     +'</ul></div></div>'
+   +'<div class="panel"><div class="ph"><h3>The symptom traffic light</h3><span class="cnt mono">stop the set</span></div>'
+     +'<div class="scroll"><table><thead><tr><th>Signal</th><th>What it means</th><th>What you do</th></tr></thead><tbody>'
+     +[["Leaking, any amount","Too much load or too much impact","Stop the exercise. Regress a level next session."],
+       ["Heaviness, dragging, bulging","The pelvic floor is overloaded","Stop the session. Legs up the wall 10 min. Regress a full week."],
+       ["Abdominal doming or coning","Pressure exceeds what the midline can manage","Shorten the range until it disappears. That range is your current limit."],
+       ["Bleeding increases or turns red again","You did too much","Back to the last symptom-free volume for 4–5 days."],
+       ["Pubic bone or SI joint pain","Pelvic instability","Drop wide-stance and single-leg work. Narrow stance only."],
+       ["Any pelvic pain during a lift","Not a push-through","Stop. If it repeats, see the PT before continuing."]]
+       .map(r=>'<tr><td><b>'+r[0]+'</b></td><td>'+r[1]+'</td><td>'+r[2]+'</td></tr>').join("")
+     +'</tbody></table></div><div class="pb"><div class="note"><b>Regressing is the program working.</b> The plan is a hypothesis; '
+     +'your body returns the result. None of this is a failure of discipline.</div></div></div>'
+   +'<div class="panel"><div class="ph"><h3>Book a pelvic floor PT</h3></div><div class="pb tight"><ul class="check" style="pointer-events:none">'
+     +[["Any leaking at all, at any point",""],["Heaviness or bulging at the end of the day",""],
+       ["A gap you can't generate tension across","Or one that isn't narrowing by about 3 months."],
+       ["Pain with intercourse",""],["A pelvic floor you can't feel contract — or can't feel release",""],
+       ["Low back or hip pain that isn't improving",""]]
+       .map(r=>'<li><div class="txt"><b>'+r[0]+'</b>'+(r[1]?'<span>'+r[1]+'</span>':'')+'</div></li>').join("")
+     +'</ul><div class="note" style="margin-bottom:14px"><b>Ask at your 6-week visit even if none of these apply.</b> '
+     +'In France and much of Europe every postpartum woman gets pelvic floor PT by default; in the US you have to ask. '
+     +'Kaiser and Sutter both have pelvic health PT in the East Bay, and it is typically covered.</div></div></div>'
+   +'<div class="panel"><div class="ph"><h3>The fatigue that isn\'t the baby</h3></div><div class="pb">'
+     +'<p style="margin:0;font-size:14.5px;color:var(--ink-2)">At the 6-week visit, ask for <b>CBC, ferritin, TSH, and vitamin D</b>. '
+     +'Low ferritin is very common after delivery and feels exactly like new-parent exhaustion. Postpartum thyroiditis affects '
+     +'roughly 5% of women, usually shows up at 2–6 months, and gets missed constantly because every symptom overlaps with having a newborn. '
+     +'If energy isn\'t improving by month 3, that is a lab question, not a willpower question.</p></div></div>'
+   +'<div class="panel"><div class="ph"><h3>Run-readiness test</h3><span class="cnt mono">~Nov 9</span></div><div class="pb tight">'
+     +'<div class="note" style="margin:10px 0 4px">Every item, with <b>no leaking, no heaviness, no pain, no doming</b> — during, and in the 24 hours after. '
+     +'Fresh, not after a workout. A failed test is not a setback; it is the test doing its job.</div>'
+     +'<ul class="check" style="pointer-events:none">'
+     +[["Walk 30 min briskly",""],["Single-leg balance, eyes closed","10 sec/side"],["Single-leg calf raise","20/side"],
+       ["Single-leg bridge","20/side"],["Single-leg sit-to-stand","20/side"],["Side plank from feet","30 sec/side"],
+       ["Single-leg wall sit","60 sec/side"],["Jog in place","1 min"],["Forward bounds","10"],
+       ["Hop in place, one leg","10/side"],["Running-man drill","10/side"]]
+       .map(r=>'<li><div class="txt"><b>'+r[0]+'</b></div>'+(r[1]?'<span class="dose">'+r[1]+'</span>':'')+'</li>').join("")
+     +'</ul></div></div>'
+   +'<div class="panel"><div class="ph"><h3>Why running waits</h3></div><div class="pb">'
+     +'<p style="margin:0;font-size:14.5px;color:var(--ink-2)">Running is roughly 2.5–3× bodyweight of impact, on one leg, 160–180 times a minute. '
+     +'At 12 weeks that is about 2,000 single-leg landings through a pelvic floor and abdominal wall still remodeling, with connective tissue '
+     +'still relaxin-affected — longer while breastfeeding. The cost of going early isn\'t soreness. It is stress incontinence or prolapse that '
+     +'takes a year to walk back. You\'ve run a marathon, which makes this harder, not easier: the instinct is to treat running as the baseline '
+     +'you return to, when postpartum it is the most demanding thing in the plan and belongs near the end.</p></div></div>';
+}
+
+/* ============ wiring ============ */
+function setStamp(){
+  document.getElementById("ppwk").textContent="wk "+ppWeek(today);
+  const ph=phaseOf(today);
+  document.getElementById("phname").textContent=ph?ph.n:"—";
+  const dd=Math.round((SIXWK-today)/DAY);
+  document.getElementById("dday").textContent = dd>0? dd+"d" : (dd===0?"today":"done");
+  document.getElementById("subline").textContent =
+    "Postpartum training & nutrition · day "+ppDay(today)+" · "+today.toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"});
+}
+function show(p){
+  document.querySelectorAll('.tabs button').forEach(b=>b.setAttribute("aria-selected",String(b.dataset.p===p)));
+  ["today","intake","plan","fuel","watch"].forEach(k=>{
+    document.getElementById("p-"+k).hidden = k!==p; });
+  window.scrollTo({top:0,behavior:"instant"});
+}
+document.querySelector(".tabs").addEventListener("click",e=>{
+  const b=e.target.closest("button[data-p]"); if(b) show(b.dataset.p); });
+
+document.addEventListener("click",e=>{
+  const nav=e.target.closest("[data-nav]");
+  if(nav){ cursor=new Date(cursor.getTime()+Number(nav.dataset.nav)*DAY); renderToday(); return; }
+  const go=e.target.closest("[data-go]");
+  if(go){ e.preventDefault(); cursor=parse(go.dataset.go); renderToday(); return; }
+  const t=e.target.closest("[data-tier]");
+  if(t){ const k=iso(cursor),L=logFor(k); L.tier = L.tier===t.dataset.tier?null:t.dataset.tier;
+         saveLog(k); renderToday(); return; }
+  const sym=e.target.closest("[data-sym]");
+  if(sym){ const k=iso(cursor),L=logFor(k),n=sym.dataset.sym;
+           L.sym[n]=!L.sym[n]; saveLog(k); sym.setAttribute("aria-pressed",String(!!L.sym[n])); return; }
+  const sh=e.target.closest(".sh");
+  if(sh){ const s=sh.parentElement, open=s.classList.toggle("open");
+          sh.setAttribute("aria-expanded",String(open)); return; }
+  const one=e.target.closest("[data-svone]");
+  if(one){ const id=one.dataset.svone;
+           SURVEY_A[id] = SURVEY_A[id]===one.dataset.val ? "" : one.dataset.val;
+           saveDoc("intake/survey",SURVEY_A);
+           one.parentElement.querySelectorAll(".chip").forEach(c=>
+             c.setAttribute("aria-pressed",String(c.dataset.val===SURVEY_A[id])));
+           bumpCount(one); return; }
+  const many=e.target.closest("[data-svmany]");
+  if(many){ const id=many.dataset.svmany, v=SURVEY_A[id]=Array.isArray(SURVEY_A[id])?SURVEY_A[id].slice():[];
+            const at=v.indexOf(many.dataset.val); at>-1?v.splice(at,1):v.push(many.dataset.val);
+            SURVEY_A[id]=v; saveDoc("intake/survey",SURVEY_A);
+            many.setAttribute("aria-pressed",String(v.includes(many.dataset.val)));
+            bumpCount(many); return; }
+  if(e.target.id==="showtxt"){ const ta=document.getElementById("answers");
+    ta.value=answersText(); ta.hidden=!ta.hidden;
+    e.target.textContent = ta.hidden ? "Show my answers as text" : "Hide";
+    return; }
+});
+function bumpCount(node){
+  const sect=node.closest(".sect"); if(!sect) return;
+  const s=SURVEY[Number(sect.dataset.sect)];
+  const done=s.q.filter(q=>{const v=SURVEY_A[q.i];return Array.isArray(v)?v.length:(v!==undefined&&v!=="")}).length;
+  sect.querySelector(".cnt").textContent=done+"/"+s.q.length;
+}
+document.addEventListener("change",e=>{
+  const c=e.target.closest("[data-done]");
+  if(c){ const k=iso(cursor),L=logFor(k); L.done[c.dataset.done]=c.checked; saveLog(k); renderToday(); }
+});
+document.addEventListener("input",e=>{
+  const lg=e.target.closest("[data-log]");
+  if(lg){ const k=iso(cursor),L=logFor(k); L[lg.dataset.log]=lg.value; saveLog(k); return; }
+  const sv=e.target.closest("[data-sv]");
+  if(sv){ SURVEY_A[sv.dataset.sv]=sv.value; saveDoc("intake/survey",SURVEY_A); bumpCount(sv); }
+});
+document.addEventListener("keydown",e=>{
+  if((e.key==="Enter"||e.key===" ")&&e.target.matches("[data-go]")){ e.preventDefault(); e.target.click(); }
+});
+
+/* first paint from local cache, then upgrade from the store */
+SURVEY_A = LS.get("intake/survey") || {};
+for(let i=-21;i<=7;i++){ const k=iso(new Date(today.getTime()+i*DAY)); const v=LS.get("log/"+k); if(v) LOG[k]=v; }
+setStamp(); renderToday(); renderIntake(); renderPlan(); renderFuel(); renderWatch();
+
+(async ()=>{
+  try{ db = await window.claude?.use?.("db"); }catch(e){ db=null; }
+  if(!db){ flag("Saved on this device.",false); return; }
+  try{
+    const s = await db.doc("intake/survey").get();
+    if(s.exists){ SURVEY_A = Object.assign({}, s.data()); delete SURVEY_A.updatedAt;
+                  LS.set("intake/survey",SURVEY_A); renderIntake(); }
+    const days=[]; for(let i=-21;i<=7;i++) days.push(iso(new Date(today.getTime()+i*DAY)));
+    const got = await Promise.all(days.map(k=>db.doc("log/"+k).get().catch(()=>null)));
+    got.forEach((snap,ix)=>{ if(snap&&snap.exists){ const d=Object.assign({},snap.data());
+      d.done=d.done||{}; d.sym=d.sym||{}; LOG[days[ix]]=d; } });
+    renderToday();
+    flag("Synced. Answers save as you type.",true);
+  }catch(e){ flag("Saved on this device only.",false); }
+})();
+</script>
