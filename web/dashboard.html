@@ -269,17 +269,17 @@ let cursor = new Date(today);
 
 /* ============ the phases ============ */
 const PHASES = [
- {n:"0",name:"Reconnect",   from:"2026-09-07",to:"2026-09-27",wk:"PP wk 4–6",
-  goal:"Restore the pressure system — breath, pelvic floor, deep core, posture. Not fitness.",
+ {n:"0",name:"Reconnect",   from:"2026-09-07",to:"2026-09-29",wk:"PP wk 4–6",
+  goal:"Restore the pressure system — breath, pelvic floor, deep core, posture. Not fitness. Revised Sep 8: walking capped and split, bike is the cardio engine, no carries.",
   cardio:"Walk 10 → 30 min",strength:"Bodyweight seeds, RPE 3–4"},
- {n:"1",name:"Rebuild the Base",from:"2026-09-28",to:"2026-10-25",wk:"PP wk 7–10",
-  goal:"Establish the weekly shape you keep for years, at loads that are deliberately too easy.",
+ {n:"1",name:"Rebuild the Base",from:"2026-09-30",to:"2026-10-25",wk:"PP wk 7–10",
+  goal:"Establish the six-day shape you keep for years, at loads deliberately too easy. Four sessions non-negotiable, two bonus.",
   cardio:"Bike Zone 2, 20 → 30 min",strength:"3×/wk · RPE 5–6 · 8–12 reps"},
  {n:"2",name:"Load + Impact Prep",from:"2026-10-26",to:"2026-11-22",wk:"PP wk 11–14",
-  goal:"Real progressive overload, plus a deliberate on-ramp to impact. Run-readiness test in week 13.",
+  goal:"Circuits, the impact ladder, and weaning — all three start Oct 26. Run-readiness test in week 13.",
   cardio:"Bike intervals",strength:"3×/wk · RPE 7 · 6–8 reps"},
- {n:"3",name:"Build",       from:"2026-11-23",to:"2026-12-06",wk:"PP wk 15–16",
-  goal:"Two weeks, and they matter more than their length suggests — the last block before work, weaning and the holidays all land at once. Push here. Set a PR on every main lift. The milk taper starts this week too.",
+ {n:"3",name:"The Mile",    from:"2026-11-23",to:"2026-12-06",wk:"PP wk 15–16",
+  goal:"Two weeks carrying your headline goal. Walk/run starts, and the mile lands around Sat Dec 19 — two weeks inside your Dec 31 deadline.",
   cardio:"Walk/run 2×/wk",strength:"3×/wk · RPE 7–8 · 5–6 reps"},
  {n:"4",name:"Work & Wean", from:"2026-12-07",to:"2027-01-03",wk:"PP wk 17–20",
   goal:"Back at work, finishing the wean, and the holidays — three hard transitions stacked. The goal is not progress. It is arriving on Jan 4 having not stopped.",
@@ -291,20 +291,22 @@ const phaseOf = d => PHASES.find(p => d>=parse(p.from) && d<=parse(p.to)) || nul
 const RESET = [
  {k:"reset1",b:"360° breathing",d:"Ribs widen sideways and back on the inhale; pelvic floor releases down. Don't suck the belly in.",n:"10 breaths"},
  {k:"reset2",b:"Connection breath",d:"Exhale: gently lift the pelvic floor, low belly draws in behind it. Effort 3/10. Fully release on the inhale.",n:"10 reps"},
- {k:"reset3",b:"Pelvic floor sets",d:"Quick flicks, then long holds — full release between every rep. Once a day, not more.",n:"10 + 5"},
- {k:"reset4",b:"Mobility circuit",d:"Cat-cow ×8 · chest opener over a block 60s · thread-the-needle ×5/side · glute bridge ×10 · heel slides ×8/side · neck + wrist stretch.",n:"1 round"}
+ {k:"reset3",b:"Pelvic floor sets",d:"10 quick flicks, 5 long holds — then 5 deliberate releases, holding the release 5 seconds. Most people skip that half. You specifically should not.",n:"10 + 5 + 5"},
+ {k:"reset4",b:"Mobility circuit",d:"Cat-cow ×8 · chest opener over a block 60s · thread-the-needle ×5/side · chin tucks ×10 · upper trap stretch 45s/side · glute bridge ×10 · heel slides ×8/side · supported deep squat 60s · wrist stretch.",n:"1 round"},
+ {k:"reset5",b:"Legs up the wall",d:"After every walk. This is the reset that makes the next walk possible — not optional while the heaviness is there.",n:"5 min"}
 ];
 const SEEDS = [
  {k:"s1",b:"Sit-to-stand",n:"2 × 8"},{k:"s2",b:"Wall push-up",n:"2 × 10"},
  {k:"s3",b:"Band pull-apart",n:"2 × 12"},{k:"s4",b:"Standing hip abduction",n:"2 × 10/side"},
- {k:"s5",b:"Bird dog",n:"2 × 6/side"},{k:"s6",b:"Calf raise",n:"2 × 12"}
+ {k:"s5",b:"Bird dog — stop at the range where the belly domes",n:"2 × 6/side"},
+ {k:"s6",b:"Calf raise",n:"2 × 12"},{k:"s7",b:"Glute bridge",n:"2 × 12"}
 ];
 const LIFTS = {
  A:{t:"Strength A — Squat + Push",x:[
   ["Goblet squat to a box","3 × 8–10","10 lb"],["Incline push-up","3 × 8","body"],
   ["Band row, anchored","3 × 12","light band"],["Glute bridge","3 × 12","body"],
   ["Banded clamshell","2 × 15/side","light band"],["Dead bug, heel taps","2 × 8/side","body"],
-  ["Farmer carry","3 × 30 sec","15 lb/hand"]]},
+  ["Wall sit","2 × 20 sec","body"]]},
  B:{t:"Strength B — Hinge + Pull",x:[
   ["DB Romanian deadlift","3 × 10","12.5 lb/hand"],["Single-arm DB row","3 × 10/side","15 lb"],
   ["Split squat, both feet down","3 × 8/side","body"],["Band pull-apart","3 × 15","light band"],
@@ -313,21 +315,25 @@ const LIFTS = {
  C:{t:"Strength C — Full body + carries",x:[
   ["Step-up, low box","3 × 8/side","body"],["DB floor press","3 × 10","12.5 lb/hand"],
   ["Sumo DB deadlift","3 × 10","20 lb"],["Band face pull","3 × 15","light band"],
-  ["Suitcase carry","3 × 30 sec/side","15 lb"],["Single-leg balance","2 × 20 sec/side","body"],
-  ["Wall sit","2 × 20 sec","body"]]}
+  ["Single-leg balance","2 × 20 sec/side","body"],["Glute bridge march","2 × 8/side","no doming"],
+  ["Dead bug","2 × 8/side","shortened range"]]}
 };
 
 /* Phase 0: explicit days. w = walk minutes. */
 const P0 = {
- "2026-09-08":{w:10,first:1},"2026-09-09":{w:12},"2026-09-10":{w:12,y:"10 min restorative yoga"},
- "2026-09-11":{w:15},"2026-09-12":{w:15},"2026-09-13":{w:0,y:"10 min meditation",rest:1},
- "2026-09-14":{w:15,st:1},"2026-09-15":{w:18},"2026-09-16":{w:0,y:"15 min postnatal or slow flow"},
- "2026-09-17":{w:18,st:1},"2026-09-18":{w:20},"2026-09-19":{w:20,y:"10 min stretch"},
+ "2026-09-08":{w:10,note:"Call about a pelvic floor PT referral today — East Bay waits run 2–4 weeks, so calling now means being seen around when you're cleared instead of in November. This is also your commitment device: a booked appointment is the Orange Theory mechanism pointed at the thing that matters most."},
+ "2026-09-09":{w:10,bike:10},"2026-09-10":{w:10,w2:1,y:"10 min restorative yoga"},
+ "2026-09-11":{w:10,bike:12},"2026-09-12":{w:12,w2:1},
+ "2026-09-13":{w:0,y:"10 min meditation",rest:1,note:"Note your symptom-free walk length. That number is your dose for the next two weeks."},
+ "2026-09-14":{w:0,st:1,bike:12},"2026-09-15":{w:12,w2:1},"2026-09-16":{w:0,y:"15 min postnatal or slow flow"},
+ "2026-09-17":{w:0,st:1,bike:15},"2026-09-18":{w:12,w2:1},"2026-09-19":{w:12,bike:15},
  "2026-09-20":{w:0,y:"10 min meditation",rest:1},
- "2026-09-21":{w:20,st:1},"2026-09-22":{w:25,bike:1},"2026-09-23":{w:0,y:"20 min yoga"},
- "2026-09-24":{w:25,st:1},"2026-09-25":{w:0,bike:1,alt:"or 25 min walk"},
- "2026-09-26":{w:30,note:"30 minutes continuous — the Phase 0 graduation test. Also: happy 39th."},
- "2026-09-27":{w:0,y:"10 min meditation",rest:1,note:"Fill in the Phase 0 exit checklist before Phase 1 starts tomorrow."}
+ "2026-09-21":{w:0,st:1,bike:15},"2026-09-22":{w:12,w2:1,note:"Five symptom-free days? Add 3–5 minutes to one walk. Not both."},
+ "2026-09-23":{w:0,y:"20 min yoga"},"2026-09-24":{w:0,st:1,bike:18},"2026-09-25":{w:12,w2:1},
+ "2026-09-26":{w:0,bike:20,note:"Happy 39th."},
+ "2026-09-27":{w:0,y:"10 min meditation",rest:1},
+ "2026-09-28":{w:0,bike:20,note:"Write down your six questions for tomorrow — they're on the Watch for tab."},
+ "2026-09-29":{w:10,note:"6-week visit. Lead with: 'I have heaviness and dragging after walking and carrying. I'd like a pelvic floor PT referral.'"}
 };
 const P4 = { /* Dec 7 → Jan 3: two strength, two runs, never zero */
  1:{k:"A",min:1},2:{k:"run",t:"Run/walk",d:"See the ladder — wk 17 is 5 × (3 min jog / 2 min walk)."},
@@ -337,7 +343,7 @@ const P4 = { /* Dec 7 → Jan 3: two strength, two runs, never zero */
  0:{k:"rest",t:"Rest",d:"Actually rest."}
 };
 const MIN5 = [["Goblet squat","3 × 8"],["Single-arm DB row","3 × 8/side"],["DB floor press","3 × 8"],
-              ["DB Romanian deadlift","3 × 8"],["Farmer carry","3 × 40 sec"]];
+              ["DB Romanian deadlift","3 × 8"],["Side plank","3 × 30 sec/side"]];
 const WEEKDAY = { /* phase 1–3 template by day index (0=Sun) */
  1:{k:"A"},2:{k:"cardio",t:"Bike Zone 2 + walk",d:"Conversational the whole way. 20 min, building 2–3 min a week."},
  3:{k:"B"},4:{k:"yoga",t:"Peloton yoga / mobility + walk",d:"20–30 min. Slow flow or postnatal."},
@@ -354,12 +360,19 @@ function sessionFor(d){
     const b=[{h:"The Reset — daily, ~12 min",items:RESET}];
     if(p.st) b.push({h:"Strength seeds — RPE 3–4, should feel almost pointless",items:SEEDS});
     const c=[];
-    if(p.w) c.push({k:"walk",b:"Walk",d:p.rest?"":"Flat. Conversational. Stop before you want to.",n:p.w+" min"});
-    if(p.bike) c.push({k:"bike",b:"Peloton bike — only if the Week 6 gates are met",d:"Lochia stopped, no perineal soreness sitting 10 min on a hard chair, no heaviness after your longest walk.",n:"10–15 min easy"});
+    if(p.w) c.push({k:"walk",b:p.w2?"Walk ×2, split across the day":"Walk",
+      d:"Flat, conversational, and stop before you want to. Split beats long — same total, far less downward load. Legs up the wall for 5 min after.",
+      n:p.w+" min"+(p.w2?" each":"")});
+    if(p.bike) c.push({k:"bike",b:"Peloton bike, easy",
+      d:"Seated, non-weight-bearing, almost no downward pressure — close to ideal for the heaviness. Low resistance, conversational, stay in the saddle, ignore the leaderboard.",
+      n:p.bike+" min"});
     if(p.y) c.push({k:"yoga",b:"Peloton app",d:"Skip anything with plank, chaturanga, boat, or deep twists.",n:p.y});
     if(c.length) b.push({h:p.rest?"Rest day":"Movement",items:c});
     let title = p.rest ? "Rest + The Reset"
-      : (p.w>=30 ? "The 30-minute walk" : (p.st ? "Reset + seeds + walk" : (p.w? "Reset + "+p.w+" min walk" : "Reset + Peloton")));
+      : (p.st ? "Reset + strength seeds + bike"
+      : (p.bike && p.w ? "Reset + bike + walk"
+      : (p.bike ? "Reset + "+p.bike+" min bike"
+      : (p.w ? "Reset + walk"+(p.w2?"s":"") : "Reset + Peloton"))));
     return {ph,title,note:p.note,blocks:b};
   }
   const t = (ph.n==="4" ? P4 : WEEKDAY)[d.getDay()];
@@ -373,7 +386,7 @@ function sessionFor(d){
   if(t.k==="A"||t.k==="B"||t.k==="C"){
     const L=LIFTS[t.k];
     return {ph,title:L.t,blocks:[
-      {h:"Every set: exhale on the effort, pelvic floor lifts with it",
+      {h:"Every set: exhale on the effort, pelvic floor lifts with it. No carries until the heaviness clears.",
        items:L.x.map((r,i)=>({k:t.k+i,b:r[0],d:"Start around "+r[2]+". Add reps to the top of the range before you add load.",n:r[1]}))},
       {h:"Finish",items:[{k:"reset_s",b:"The Reset",d:"Shortened is fine — breath and pelvic floor at minimum.",n:"5 min"}]}]};
   }
@@ -719,7 +732,32 @@ function renderPlan(){
 function renderFuel(){
   document.getElementById("p-fuel").innerHTML=
    '<div><span class="eyebrow">Fuel</span><h2 class="head" style="margin-top:4px">Enough, before anything else</h2>'
-   +'<p class="lede">Rewritten around your answers once Section D comes back — feeding method changes everything. This is the version that holds regardless.</p></div>'
+   +'<p class="lede">Your numbers, from the Sep 8 intake: 5\'5", 162 lb, 12 nursing and pump sessions a day.</p></div>'
+   +'<div class="panel"><div class="scroll"><table><thead><tr><th>&nbsp;</th><th>Now</th><th>After weaning</th></tr></thead><tbody>'
+   +'<tr><td><b>Calories</b></td><td class="n">~2,400/day · floor 2,000</td><td class="n">~1,950</td></tr>'
+   +'<tr class="now"><td><b>Protein</b></td><td class="n">130 g/day</td><td class="n">130 g — unchanged</td></tr>'
+   +'<tr><td><b>Water</b></td><td class="n">120 oz <span style="color:var(--muted)">(you\'re at 100)</span></td><td class="n">90–100 oz</td></tr>'
+   +'<tr><td><b>Caffeine</b></td><td class="n">~75–95 mg — fine</td><td class="n">same</td></tr>'
+   +'</tbody></table></div><div class="pb"><div class="alarm"><b>The single biggest gap:</b> you said protein is '
+   +'"some at dinner only" — call it 55 g. Getting to 130 is worth more than every other change here combined. '
+   +'It is what turns the training into muscle instead of fatigue, and it is a logistics problem, not a knowledge one.</div></div></div>'
+   +'<div class="panel"><div class="ph"><h3>Four anchors, built from what you already eat</h3><span class="cnt mono">~127 g</span></div>'
+   +'<div class="scroll"><table><thead><tr><th>Anchor</th><th>Version</th><th>Protein</th></tr></thead><tbody>'
+   +'<tr class="now"><td class="n">Morning</td><td>Oatmeal made with <b>milk instead of water</b> + a scoop of protein powder + banana</td><td class="n">~32 g</td></tr>'
+   +'<tr><td class="n">Midday</td><td>3 eggs + 2 slices toast, or last night\'s protein</td><td class="n">~30 g</td></tr>'
+   +'<tr><td class="n">Afternoon</td><td>Greek yogurt + banana, or a premade shake</td><td class="n">~30 g</td></tr>'
+   +'<tr><td class="n">Evening</td><td>Dinner + a second serving of the protein</td><td class="n">~35 g</td></tr>'
+   +'</tbody></table></div><div class="pb"><div class="note"><b>If you change one thing this week, change the oatmeal.</b> '
+   +'Made with milk and a scoop of protein powder it goes from 6 g to 32 g and takes no extra time. '
+   +'Olives are a fat and a flavour — keep eating them, just don\'t count them.</div></div></div>'
+   +'<div class="panel"><div class="ph"><h3>On the 22 lb</h3></div><div class="pb">'
+   +'<p style="margin:0 0 10px;font-size:15px"><b>Don\'t diet. Not yet, and probably not in 2026.</b></p>'
+   +'<p style="margin:0;font-size:14.5px;color:var(--ink-2)">Eat to ~2,400, hit 130 g of protein, and the weight moves on its own — '
+   +'full lactation plus returning activity plus adequate protein is already a real daily deficit without you doing anything about it. '
+   +'Expect 0.5–1 lb a week, which puts you around 145–152 by New Year without a single restricted meal. '
+   +'Weekly weigh-ins are fine since you asked: <b>same day, same time, first thing</b>, and read the four-week trend, not the number — '
+   +'weight swings 2–4 lb on water alone with this much fluid turnover. Deliberate fat loss is a Q1-2027 project, and it will be far '
+   +'easier then: weaned, sleeping better, four months of muscle behind you.</p></div></div>'
    +'<div class="panel"><div class="ph"><h3>The one rule right now</h3></div><div class="pb">'
      +'<p style="margin:0 0 10px;font-size:15px"><b>You are not in a fat-loss phase.</b> Not at 3 weeks, not at 8.</p>'
      +'<p style="margin:0;font-size:14.5px;color:var(--ink-2)">Your body is healing a placental wound roughly the size of a dinner plate, '
@@ -785,7 +823,8 @@ function renderFuel(){
        .map(r=>'<li><span class="dose">'+r[2]+'</span><div class="txt"><b>'+r[0]+'</b><span>'+r[1]+'</span></div></li>').join("")
      +'</ul></div></div>'
    +'<div class="panel"><div class="ph"><h3>Supplements</h3></div><div class="pb stack">'
-     +'<div><span class="eyebrow">Worth it</span><p style="margin:4px 0 0;font-size:14.5px;color:var(--ink-2)">Prenatal (keep going), vitamin D, omega-3, magnesium glycinate at night for sleep and cramps, protein powder as a convenience.</p></div>'
+     +'<div><span class="eyebrow">You take: prenatal only</span><p style="margin:4px 0 0;font-size:14.5px;color:var(--ink-2)">Keep it — not optional while lactating. <b>Add three:</b> vitamin D 1,000–2,000 IU · omega-3 300 mg DHA · magnesium glycinate 200–400 mg at night, which helps sleep, the headaches, and the constipation driving the hemorrhoids. Protein powder counts too — it\'s the mechanism for the oatmeal fix.</p></div>'
+     +'<div><span class="eyebrow">Iron — wait for labs</span><p style="margin:4px 0 0;font-size:14.5px;color:var(--ink-2)">Don\'t supplement blind. Ask for ferritin and a CBC on Sep 29: headaches plus energy at 5/10 plus 12 nursing sessions makes low ferritin worth ruling out, and it feels exactly like new-parent exhaustion.</p></div>'
      +'<div><span class="eyebrow">On the January list</span><p style="margin:4px 0 0;font-size:14.5px;color:var(--ink-2)">Creatine — well-supported for women, but the lactation data is thin. Once you\'ve weaned, 3–5 g a day is one of the better-evidenced things you can add, and it lands exactly on your real build month.</p></div>'
      +'<div><span class="eyebrow">Skip</span><p style="margin:4px 0 0;font-size:14.5px;color:var(--ink-2)">Anything marketed as postpartum weight loss, detox teas, appetite suppressants, fat burners. All contraindicated while breastfeeding and most contraindicated generally.</p></div>'
    +'</div></div>'
@@ -799,6 +838,39 @@ function renderWatch(){
   document.getElementById("p-watch").innerHTML=
    '<div><span class="eyebrow">Safety</span><h2 class="head" style="margin-top:4px">What stops a session, and what stops the day</h2>'
    +'<p class="lede">Read this once. It is short, and it outranks everything else in here.</p></div>'
+   +'<div class="panel" style="border-color:var(--stop)"><div class="ph" style="background:var(--stop-soft)">'
+     +'<h3 style="color:var(--stop)">Two things to do this week</h3><span class="cnt mono">before Sep 29</span></div>'
+     +'<div class="pb tight"><ul class="check" style="pointer-events:none">'
+     +'<li><div class="txt"><b>Call for a pelvic floor PT referral — don\'t wait for the visit</b>'
+     +'<span>Heaviness after walking, doming, a 2nd degree tear, a second baby, and leaking during pregnancy. That is the exact profile pelvic floor PT exists for. East Bay waits run 2–4 weeks, so calling now means being seen around when you\'re cleared rather than in November. Many practices take a self-referral.</span></div></li>'
+     +'<li><div class="txt"><b>Get a blood pressure reading for the headaches</b>'
+     +'<span>Your BP was normal at discharge and the likeliest cause is posture and dehydration — 12 feeds a day, a 3-hour maximum sleep stretch, 100 oz of water when you need 120, neck bent forward for hours. But postpartum preeclampsia can appear up to 6 weeks after delivery and you are at week 4. Home cuff or any pharmacy, then bring the numbers to Sep 29. <b>Go in the same day</b> if a headache comes with vision changes, spots, new facial or hand swelling, upper abdominal pain, or if it is severe and won\'t respond to medication.</span></div></li>'
+     +'</ul></div></div>'
+   +'<div class="panel"><div class="ph"><h3>Take these to Sep 29</h3><span class="cnt mono">in this order</span></div>'
+     +'<div class="pb tight"><ul class="check" style="pointer-events:none">'
+     +[["\u201cI have heaviness and dragging after walking and carrying. I\u2019d like a pelvic floor PT referral.\u201d","Say this first, before anything else."],
+       ["\u201cMy belly domes when I lift my head or the car seat. Can you check my diastasis?\u201d",""],
+       ["\u201cI\u2019ve been having headaches. Here are my home BP readings.\u201d",""],
+       ["\u201cCan I get a CBC, ferritin, TSH, and vitamin D?\u201d","Twelve nursing sessions a day, energy at 5/10, and headaches."],
+       ["\u201cI want to be weaned by Dec 7 and I have a history of clogged ducts. Any advice on pacing?\u201d",""],
+       ["\u201cAm I cleared for progressive strength training, and for impact later?\u201d",""]]
+       .map((r,i)=>'<li><span class="dose">'+(i+1)+'</span><div class="txt"><b>'+r[0]+'</b>'+(r[1]?'<span>'+r[1]+'</span>':'')+'</div></li>').join("")
+     +'</ul></div></div>'
+   +'<div class="panel"><div class="ph"><h3>Your two live symptoms</h3></div><div class="pb stack">'
+     +'<div><span class="eyebrow">Heaviness after walking or carrying</span>'
+     +'<p style="margin:4px 0 0;font-size:14.5px;color:var(--ink-2)">Not an emergency, not rare, and it responds well to managing load early. Three rules while it\'s there: '
+     +'<b>walks stay at your symptom-free length and get split across the day</b>, not extended; <b>the bike replaces walking volume</b> — seated and non-weight-bearing, close to ideal for this; '
+     +'and <b>no loaded carries</b>, including your older child. Sit and let them climb into your lap. Exhale before you lift, every time. '
+     +'Legs up the wall for 5 minutes after every walk.</p></div>'
+     +'<div><span class="eyebrow">Doming</span>'
+     +'<p style="margin:4px 0 0;font-size:14.5px;color:var(--ink-2)">Roll to your side and push up with your arm to get out of bed — every time. Hinge and exhale for the car seat, or leave it in the car. '
+     +'In any exercise, shorten the range until the ridge disappears; that range is your current limit and it moves within weeks. '
+     +'Width of the gap matters less than whether you can generate tension across it.</p></div>'
+     +'<div><span class="eyebrow">One nuance on kegels</span>'
+     +'<p style="margin:4px 0 0;font-size:14.5px;color:var(--ink-2)">Tailbone pain and hemorrhoids alongside heaviness suggest a pelvic floor that may be <b>gripping</b> as well as under-supporting. '
+     +'Those coexist more often than people expect, and a floor that can\'t let go can\'t generate a strong contraction either. So do the release half as deliberately as the lift half, '
+     +'and don\'t out-kegel this — the PT eval settles which one you\'re dealing with.</p></div>'
+   +'</div></div>'
    +'<div class="panel" style="border-color:var(--stop)"><div class="ph" style="background:var(--stop-soft)">'
      +'<h3 style="color:var(--stop)">Call your provider or go in now</h3></div><div class="pb tight"><ul class="check" style="pointer-events:none">'
      +[["Bleeding that soaks a pad in an hour","Or clots bigger than a golf ball."],

@@ -28,10 +28,10 @@ weeks and Phase 4 is a complete success — no qualifier.
 | Sun | Rest | — |
 
 **The 25-minute full-body session.** Five movements, no accessories, done:
-goblet squat 3×8 · single-arm DB row 3×8 · DB floor press 3×8 · RDL 3×8 ·
-farmer carry 3×40 sec.
+goblet squat 3×10 · single-arm DB row 3×10 · DB floor press 3×10 · RDL 3×10 ·
+side plank 3×30 sec/side.
 
-**Hold your Dec 6 loads. Do not chase PRs this month.** Maintaining strength takes
+**Hold your Dec 6 loads. Do not chase anything this month.** Maintaining strength takes
 roughly a third of the work that building it does — two sessions a week at your
 existing loads will hold everything you built, and trying for more while sleep-deprived
 and newly back at work is how you get hurt or quit.
@@ -51,8 +51,8 @@ If mornings collapse, move everything to lunch or right after work. Do not try t
 protect a 6am slot on four hours of sleep and a commute; protect the *count*, not the
 time of day.
 
-### 2. Weaning
-Full detail in [`../nutrition/WEANING-AND-RETURN-TO-WORK.md`](../nutrition/WEANING-AND-RETURN-TO-WORK.md).
+### 2. Weaning — the tail end
+By Dec 7 you should be at zero or close to it, having started Oct 26. Full detail in [`../nutrition/WEANING-AND-RETURN-TO-WORK.md`](../nutrition/WEANING-AND-RETURN-TO-WORK.md).
 The training-relevant parts:
 
 - **Your calorie needs drop by roughly 450-500/day as the milk goes.** Taper your intake

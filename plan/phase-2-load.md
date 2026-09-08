@@ -1,81 +1,108 @@
-# Phase 2 — Load + Impact Prep
+# Phase 2 — Build + Impact Prep *(revised)*
 ### PP weeks 11-14 · Mon Oct 26 → Sun Nov 22, 2026
 
-**Goal:** two things at once. Real progressive overload on the strength side, and a
-deliberate on-ramp to impact so that the run-readiness test in mid-November is
-something you *pass*, not something you attempt.
+**Three things start this month, and the order matters.**
 
-Same weekly shape. Same three strength days. What changes: loads climb, reps drop,
-single-leg work takes over, and a short impact block gets bolted onto two days.
+1. **Circuits** — the format you actually show up for
+2. **The impact ladder** — the on-ramp that makes the mile possible
+3. **Weaning** — starts Oct 26, because a safe taper from 12 sessions with a mastitis
+   history needs six weeks to land before Dec 7
 
-## The weekly template
+## 🔴 The gate on impact
 
-| Day | Session |
-|---|---|
-| Mon | Strength A + impact prep |
-| Tue | Bike intervals |
-| Wed | Strength B |
-| Thu | Yoga/mobility + walk |
-| Fri | Strength C + impact prep |
-| Sat | Long walk 60-75 min, or hike |
-| Sun | Rest + Reset |
+**The impact ladder starts only if the heaviness has cleared.** Hopping on a pelvic
+floor that still drags after a walk is the one thing in this whole plan that could set
+you back months. If it hasn't cleared:
 
-## Strength changes
+- Keep building strength — that continues regardless and it helps
+- Keep the bike as your cardio
+- Push the PT on it; this is precisely their job
+- Retest impact readiness in 2-week increments
 
-**Rep scheme moves to 3 × 6-8** on the main lifts (squat, RDL, press, row) with
-meaningful load, and stays at 10-15 on the accessory work. RPE ceiling rises to 7.
+Losing 2-3 weeks here still leaves the mile reachable by late December. Pushing through
+the symptom does not.
 
-| Day | Main lifts (3 × 6-8) | Accessories |
+## The week
+
+| Day | Session | |
 |---|---|---|
-| **A** | Goblet/double-DB squat · DB bench or floor press | Glute bridge march, banded clamshell, dead bug full extension, farmer carry 45 sec |
-| **B** | DB RDL · Single-arm row | **Bulgarian split squat**, side plank full (from feet), band pull-apart, single-leg calf raise |
-| **C** | Step-up (higher box) · DB shoulder press | **Single-leg RDL**, suitcase carry 45 sec, Copenhagen plank from knee, wall sit 45 sec |
+| **Mon** | Strength A + impact prep | non-negotiable |
+| Tue | Bike intervals | bonus |
+| **Wed** | Strength B | non-negotiable |
+| Thu | Peloton yoga / mobility | bonus |
+| **Fri** | Strength circuit + impact prep | non-negotiable |
+| **Sat** | Bike long, or incline treadmill walk | non-negotiable |
+| Sun | Rest + Reset | always |
 
-**Single-leg work is the priority of this phase.** Running is a series of single-leg
-landings. Every single-leg rep now is a mile you don't get injured on later.
+## Strength
 
-## Impact prep — Mon & Fri, 5 min, added after strength
+Loads climb, reps stay honest — **3 × 10-12 at RPE 7**. Still not heavy; you'll add
+maybe 5-10 lb across the phase. What actually changes is **single-leg work**, because
+running is a series of single-leg landings and every rep now is a mile you don't get
+hurt on later.
 
-Progress one level per week, and **only if the previous level was symptom-free**:
+| Day | Focus | Movements |
+|---|---|---|
+| **A** | Squat + push | Goblet squat · DB floor or bench press · **Bulgarian split squat** · glute bridge march · dead bug · banded clamshell |
+| **B** | Hinge + pull | DB RDL · single-arm row · **single-leg RDL** · band pull-apart · side plank **from feet** · single-leg calf raise |
+| **C — circuit** | Full body | 3 rounds, 40 sec work / 20 sec rest: goblet squat · push-up · DB row · reverse lunge · dead bug · bike sprint |
+
+**Friday's circuit is the Orange Theory day.** Same stimulus, no drive, no childcare
+gap, thirty minutes. It's in the plan on purpose — you told me the format you show up
+for, and adherence beats optimality every time.
+
+**Coming back this phase, if heaviness has cleared:** loaded carries, planks from the
+feet, overhead pressing. Reintroduce one per week, not all three at once.
+
+## Impact ladder — Mon & Fri, 5 min after strength
+
+One level per week, **and only if the previous level was symptom-free.**
 
 | Week | Dates | Drill | Dose |
 |---|---|---|---|
 | 11 | Oct 26 - Nov 1 | Heel raise + drop, both feet | 3 × 20 |
-| 12 | Nov 2-8 | Pogo hops in place, both feet, small | 3 × 15 |
-| 13 | Nov 9-15 | Hop side-to-side, both feet · single-leg hops in place | 3 × 12 · 3 × 8/side |
+| 12 | Nov 2-8 | Pogo hops in place, small | 3 × 15 |
+| 13 | Nov 9-15 | Side-to-side hops · single-leg hops in place | 3 × 12 · 3 × 8/side |
 | 14 | Nov 16-22 | Forward bounds · jog in place | 3 × 10 · 3 × 30 sec |
 
-**Any leaking, heaviness, or pain at any level = go back one level and stay there a
-week.** No exceptions, no "pushing through." Impact is where postpartum pelvic floors
-get exposed, and it is entirely avoidable by respecting this one rule.
+**Any leaking, heaviness, or pain = back one level for a week.** No exceptions and no
+pushing through. Impact is where postpartum pelvic floors get exposed, and it is
+entirely avoidable by respecting this one rule.
 
-## Bike intervals (Tue)
+## Bike intervals — Tue
 
-Replaces steady Zone 2 once you can hold 30 min conversationally.
-- Warm-up 8 min easy
-- 6 × (90 sec at RPE 7 / 90 sec easy) → build to 8 rounds by Week 14
-- Cool-down 5 min
-- Peloton equivalents: 20-30 min "Power Zone" or "Intervals & Arms" (skip the arms
-  portion if it wrecks your form)
+- Warm up 8 min easy
+- 6 × (90 sec at RPE 7 / 90 sec easy) → build to 8 rounds by week 14
+- Cool down 5 min
 
-## The run-readiness test — do it in Week 13, around Nov 9
+This is your aerobic engine for the mile. Peloton "Power Zone" or "Intervals."
 
-This is the standard postpartum return-to-running screen (Goom/Donnelly/Brockwell).
-Full protocol and scoring: [`../reference/RETURN-TO-RUNNING.md`](../reference/RETURN-TO-RUNNING.md).
+## Weaning starts Oct 26
 
-Pass every item with **no leaking, no heaviness, no pain, no doming** → you start
-walk/run in Phase 3. Fail any item → you keep building and retest in 3-4 weeks. A
-failed test is not a setback; it is the test doing its job.
+Full schedule: [`../nutrition/WEANING-AND-RETURN-TO-WORK.md`](../nutrition/WEANING-AND-RETURN-TO-WORK.md).
+One session dropped every 5 days, starting Oct 26, done by about Dec 5.
+
+**Your calories come down with it** — roughly 100-150 kcal per session dropped, from
+~2,400 now to ~1,950 weaned. Not all at once at the end.
+
+## The run-readiness test — week 13, around Nov 9
+
+Full protocol: [`../reference/RETURN-TO-RUNNING.md`](../reference/RETURN-TO-RUNNING.md).
+Pass every item with no leaking, no heaviness, no pain, no doming → walk/run starts in
+Phase 3, and the mile is on. Fail any item → train that item, retest in 3 weeks. A
+failed test is the test working.
 
 ## Phase 2 exit checklist — before Nov 23
 
-- [ ] Goblet or double-DB squat 3 × 8 at 25 lb+
-- [ ] DB RDL 3 × 8 at 25 lb each
-- [ ] Single-arm row 3 × 8 at 25 lb
-- [ ] Bulgarian split squat 3 × 8/side, bodyweight, controlled
+- [ ] Goblet squat 3 × 12 at 20 lb
+- [ ] DB RDL 3 × 12 at 20 lb/hand
+- [ ] Single-arm row 3 × 12 at 20 lb
+- [ ] Bulgarian split squat 3 × 10/side, bodyweight
 - [ ] Side plank from feet, 30 sec/side
 - [ ] Single-leg calf raise × 20/side
 - [ ] Impact ladder completed through forward bounds, symptom-free
 - [ ] Run-readiness test attempted and scored
+- [ ] Down to ~4 nursing/pump sessions a day
+- [ ] **Zero heaviness**
 
 → **[Phase 3](phase-3-build.md)**

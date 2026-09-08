@@ -11,20 +11,22 @@ you keep for years.
 | **Baby born** | Mon, Aug 17, 2026 |
 | **Today** | Tue, Sep 8, 2026 |
 | **Postpartum age** | 3 weeks + 1 day (start of PP week 4) |
-| **Birth** | Vaginal / unmedicated ("natural") |
+| **Birth** | Vaginal, unmedicated · 2nd degree tear, healed |
 | **Your age** | 38 → **39 on Sep 26, 2026** |
-| **Feeding** | Breastfeeding + pumping (all breastmilk) |
-| **Back at work** | Early December 2026 |
-| **Weaning target** | Around the same time |
+| **Feeding** | Breastfeeding + pumping · 12 sessions/day |
+| **6-week visit** | **Tue Sep 29** |
+| **Back at work** | **Mon Dec 7 — fixed** |
+| **Weaning** | Done before Dec 7 · taper starts **Oct 26** |
+| **Headline goal** | **Run a mile by Dec 31** |
 | **6-week mark** | **Mon, Sep 28, 2026** |
 | **12-week mark** | Mon, Nov 9, 2026 |
 | **Current phase** | **Phase 0 — Reconnect** |
 
 ## How to use this repo
 
-1. **Fill out [`intake/INTAKE-SURVEY.md`](intake/INTAKE-SURVEY.md).** It is long on
-   purpose. Every question changes something in the plan. Answer inline, commit it,
-   and the plan gets rebuilt around your answers.
+1. **Intake is done** — answers and their consequences are in
+   [`intake/ANSWERS.md`](intake/ANSWERS.md). The blank form stays at
+   [`intake/INTAKE-SURVEY.md`](intake/INTAKE-SURVEY.md) for re-checks.
 2. **Train from [`plan/`](plan/).** Start with
    [`phase-0-reconnect.md`](plan/phase-0-reconnect.md) — that is this week.
 3. **Log in [`logs/`](logs/).** Copy `logs/TEMPLATE.md` each Monday. The log is how
@@ -51,6 +53,14 @@ Sep 7 ───────── Sep 28 ───────── Oct 26 ─�
 - **Symptoms outrank the schedule.** Leaking, heaviness/bulging, doming, pain, or a
   jump in bleeding means you regress a level that day. Every time. See
   [`plan/PROGRESSION-RULES.md`](plan/PROGRESSION-RULES.md).
+- 🔴 **Call for a pelvic floor PT referral this week — don't wait for Sep 29.** You have
+  heaviness after walking, doming, a 2nd degree tear, a second baby, and leaking during
+  pregnancy. East Bay wait times run 2-4 weeks, so calling now means being seen around
+  when you're cleared instead of in November.
+- 🔴 **Get a blood pressure reading for the headaches** before Sep 29. Probably posture
+  and dehydration; the preeclampsia window runs to 6 weeks, so it gets checked.
+- **No loaded carries and no walking progression until the heaviness clears.** The bike
+  is your cardio engine in the meantime.
 - **Ask for a pelvic floor PT referral at your 6-week visit** even if you feel fine.
   In much of Europe it is standard postpartum care; in the US you usually have to
   ask. It is the single highest-value thing you can do for the next 12 months of

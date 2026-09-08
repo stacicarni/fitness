@@ -40,8 +40,7 @@ Weeks 1-3 build, week 4 backs off: **same movements, ~60% of the load, one fewer
 Non-negotiable, and it applies for the rest of your life. Deloads are when adaptation
 consolidates. Skipping them is how people plateau at month 5 and quit at month 6.
 
-Deload weeks in this plan: PP wk 10 (Oct 19), wk 14 (Nov 16), wk 18 (Dec 14), and the
-holiday week of Dec 28.
+Deload weeks in this plan: **Oct 19, Nov 16, and Dec 28.**
 
 ## Rule 4 — The symptom traffic light 🔴
 
@@ -105,20 +104,36 @@ each block so progress is a number, not a feeling.
 
 Log these in `logs/`:
 
+Recalibrated to your goals — you said you're not interested in lifting heavy, so these
+top out around 20-25 lb rather than pushing toward 50. That's plenty to be strong on.
+
 | Test | Sep 8 baseline | Target by Jan 3 |
 |---|---|---|
-| Continuous walk | ~10 min | 75 min |
-| Goblet squat 3 × 8 | — | 30 lb |
-| DB RDL 3 × 8 | — | 30 lb/hand |
-| Single-arm row 3 × 8 | — | 30 lb |
-| DB floor/bench press 3 × 8 | — | 25 lb/hand |
-| Farmer carry 40 sec | — | 35 lb/hand |
+| **Heaviness after walking** | **Yes** | **None** ← the one that matters most |
+| **Doming** | **Yes** | None, at full range |
+| Leaking under load | None | None — keep it there |
+| Symptom-free walk | ~10 min, split | 45 min continuous |
+| Bike Zone 2 | 0 | 40 min |
+| **Continuous run** | **0** | **1 mile** ← your stated goal |
+| Goblet squat 3 × 12 | — | 22.5 lb |
+| DB RDL 3 × 12 | — | 22.5 lb/hand |
+| Single-arm row 3 × 12 | — | 22.5 lb |
+| DB floor press 3 × 12 | — | 17.5 lb/hand |
 | Push-up | Wall | 5 from the floor |
-| Side plank | — | 45 sec/side from feet |
-| Single-leg calf raise | — | 25/side |
-| Continuous jog | 0 | 20-25 min |
-| Leaking under load | ? | **None** |
+| Side plank from feet | — | 40 sec/side |
+| Single-leg calf raise | — | 22/side |
+| Bulgarian split squat | — | 3 × 10/side bodyweight |
+| Protein | ~55 g/day | 130 g on most days |
 
-## 2027 goal
+## Goals, recorded Sep 8
 
-> _(Write it here on Jan 3, with a date attached.)_
+> **Dec 31, 2026:** run a mile — *on track for ~Dec 19 if the impact gate clears*
+> **Mid-2027:** run a 10K, strong core
+> **In her words:** *"feeling strong and balanced, less injury prone, feeling like I'm
+> living to my potential"*
+
+Ranked priorities: **1. core and pelvic floor that work · 2. energy through the day ·
+3. return to running comfortably.** Note that heavy lifting is explicitly not one of
+them — the strength work here serves the three above, and it's programmed that way.
+
+> _(Set the 2027 goal properly on Jan 3, with a date attached.)_
